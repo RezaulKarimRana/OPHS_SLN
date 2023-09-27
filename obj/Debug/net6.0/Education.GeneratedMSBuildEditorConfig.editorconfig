@@ -8,49 +8,49 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Education
 build_property.RootNamespace = Education
-build_property.ProjectDir = C:\Users\md.karim\Desktop\Education\
+build_property.ProjectDir = E:\OPHS_SLN\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\md.karim\Desktop\Education
+build_property.MSBuildProjectDirectory = E:\OPHS_SLN
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/md.karim/Desktop/Education/Areas/Identity/Pages/_ViewStart.cshtml]
+[E:/OPHS_SLN/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/md.karim/Desktop/Education/Views/Home/Index.cshtml]
+[E:/OPHS_SLN/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/md.karim/Desktop/Education/Views/Home/Privacy.cshtml]
+[E:/OPHS_SLN/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/md.karim/Desktop/Education/Views/Shared/Error.cshtml]
+[E:/OPHS_SLN/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/md.karim/Desktop/Education/Views/Shared/_LayoutHome.cshtml]
+[E:/OPHS_SLN/Views/Shared/_LayoutHome.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXRIb21lLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/md.karim/Desktop/Education/Views/Shared/_LoginPartial.cshtml]
+[E:/OPHS_SLN/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/md.karim/Desktop/Education/Views/Shared/_ValidationScriptsPartial.cshtml]
+[E:/OPHS_SLN/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/md.karim/Desktop/Education/Views/_ViewImports.cshtml]
+[E:/OPHS_SLN/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/md.karim/Desktop/Education/Views/_ViewStart.cshtml]
+[E:/OPHS_SLN/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/md.karim/Desktop/Education/Views/Shared/_Layout.cshtml]
+[E:/OPHS_SLN/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-klre7eu1bf

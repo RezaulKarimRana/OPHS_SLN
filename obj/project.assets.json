@@ -2275,11 +2275,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\md.karim\\Desktop\\Education\\Education.csproj",
+      "projectUniqueName": "E:\\OPHS_SLN\\Education.csproj",
       "projectName": "Education",
-      "projectPath": "C:\\Users\\md.karim\\Desktop\\Education\\Education.csproj",
+      "projectPath": "E:\\OPHS_SLN\\Education.csproj",
       "packagesPath": "C:\\Users\\md.karim\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\md.karim\\Desktop\\Education\\obj\\",
+      "outputPath": "E:\\OPHS_SLN\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
