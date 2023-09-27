@@ -1,0 +1,796 @@
+﻿@{
+    Layout = "_LayoutHome";
+}
+<a class="skip-link" href="#jmenu">Jump to Menu</a>
+<a class="skip-link" href="#btnLang">Jump to Language</a>
+<div class="container">
+    <div class="sixteen columns" style="background-color: #06b38f; box-shadow: 0 1px 5px #999999;height:40px;">
+        <div style="display: inline-block;float: left;width: 960px;border-bottom: 4px solid #08e5c5;">
+            <marquee direction="left" scrollamount="4" onmouseover="this.stop()" onmouseout="this.start()">
+                <a href="#" style="font-weight:bold;color:#fff">ওসমানপুর প্রাগপুর মাধ্যমিক বিদ্যালয়, আলমডাঙ্গা চুয়াডাঙ্গা ।</a>
+            </marquee>
+        </div>
+    </div>
+    <div class="sixteen columns">
+        <div class="header-site-info" id="header-site-info">
+            <div>
+                <div id="logo">
+                    <a title="Home" href="index">
+                    </a>
+                </div>
+                <div class="clearfix" id="site-name-wrapper">
+                    <span id="site-name">
+                        <a title="Home" href="index">ওসমানপুর প্রাগপুর মাধ্যমিক বিদ্যালয়</a>
+                    </span>
+                </div>
+            </div>
+            <style>
+                @@media only screen and (max-width: 950px) {
+                    #logo img {
+                        display: block;
+                        width: 50px;
+                        height: 50px;
+                        align-items: center;
+                        margin-left: 20px;
+                        margin-top: -90px;
+                    }
+
+                    #site-name a {
+                        display: block;
+                        width: auto;
+                        height: auto;
+                        align-items: center;
+                        margin-left: -32px;
+                        margin-top: -42px;
+                        font-size: 16px;
+                        padding-bottom: 0px;
+                    }
+                }
+
+                }
+            </style>
+        </div>
+        <div class="callbacks_container" style="box-shadow: 0 1px 5px #999999;">
+            <ul class="rslides" id="front-image-slider">
+                <li>
+                    <img src="~/img/gallery/1.jpg" alt="" width="960" height="220" />
+                </li>
+                <li>
+                    <img src="~/img/gallery/2.jpg" alt="" width="960" height="220" />
+                </li>
+                <li>
+                    <img src="~/img/gallery/3.jpg" alt="" width="960" height="220" />
+                </li>
+                <li>
+                    <img src="~/img/gallery/4.jpg" alt="" width="960" height="220" />
+                </li>
+            </ul>
+            <style>
+                .rslides img {
+                    height: 300px;
+                }
+            </style>
+            <style>
+                @@media only screen and (max-width: 950px) {
+                    .rslides img {
+                        height: 118px;
+                        margin-top: 12px;
+                        margin-bottom: 4px;
+                        object-fit: cover;
+                        object-position: center center;
+                    }
+                }
+            </style>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var wi = $(window).width();
+            if (wi < 980) {
+                $('#jmenu .show-menu').click(function() {
+                    $(".mzr-responsive").slideToggle(400, "linear");
+                    $('.drop-one-columns').slideUp();
+                });
+                $('.submenu').on('click', function(e) {
+                    e.preventDefault();
+                    let parent = $(this).parent('.mzr-drop');
+                    parent.siblings('.mzr-drop').find('.drop-one-columns').slideUp();
+                    $(this).next('.drop-one-columns ').slideToggle();
+                    console.log(parent.siblings().find('.drop-one-columns'))
+                })
+            }
+        });
+
+    </script>
+    <style>
+        @@media only screen and (max-width: 950px) {
+            .drop-one-columns {
+                display: none;
+            }
+
+                .drop-one-columns li a {
+                    background-color: transparent;
+                    border: 0;
+                    padding-left: 20px;
+                }
+        }
+
+        .drop-one-columns li {
+            padding: 3px;
+        }
+    </style>
+    <div class="sixteen columns" id="jmenu">
+        <div class="sixteen columns" id="nav_mn">
+            <a href="javascript:;" class="show-menu menu-head"> মেনু নির্বাচন করুন</a>
+            <div role="navigation" id="dawgdrops">
+                <ul class="meganizr mzr-slide mzr-responsive">
+                    <li class="col0"><a title="Home" href="#" style="background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAYCAYAAADpnJ2CAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAqBJREFUeNq0lV2ITGEYx51xDOMz8lku0KKoyYVwITfEDRdCpJkSrbRkW1ry0VokFKJcIPlo5MLNXCjfV26UGx9xgUVZrCIydncGuzt+z/afOh3n7J4x661fZ+bMO8/n/3lfJ5VK9fuHNUjPQiaTKeuPsTId9YdZsBVqYGY6nY79L4cDYSmcgVpxAhbjdEBUI07Ekg6HDbAdPsJRcJXpCDgJl2EyzFEl3sFDSt7mNeRGKOFUOVoO9+EAPNbvb2A37IVxME0Oze4z2AZvozq0Es6HRpgC5+GsCQXqoROuKBjr51oYpd8t0NHwV6ndkKyGwipF+BPq4AZUqXwmnLyeR2A/PIItMFZ2fkNXb6JxlU2jyvQSNsNdWAbnVLIOBbZAASxSQPWecncHjqCcMIe2Ya4MrISrsAeaFflhGA85ObTofynrfbAemvT5mnraAPO8o1P6YPVeox5VKbtjCqJBI2BO2n0VKap0gxXUTu07BMclIktgBU5HdmeVTCaH8dwEB6W6XXALlkiBC+GzjDs9iKxTPTVVv4ebaslsWG3BZrPZp9azuI4qK8MpaIFq2Ahj4JMyjbLa1OOJcEFtaZaKTfVxK+lXOA074IWGt1pl/laGs9IqyOE6ezL4z1W1S9Z/V6X64jtV8upXUAkdz/ui8K/SSCTsC05zPc1hV9D8eJT8Q1k4OtbckP2BdtwySpWQmC5CqxQ+XYKbpKx6XW4Z15JldgceeN43SZkz4HtfXk+OMvBn0SHiIb2s+AKueMVC3jl9YNsJshPkMKf3sQoTcQKOwkCjryWOos7IEomQQ8CEN8S318bhNnyIotJWnTx2Dk7wBGZGXgWo94lukoLnvZ2l9xj49qhj0aJzMOG7GfK+ffb9uubTq9I8zgLn8o8AAwCrPa01oBAHBgAAAABJRU5ErkJggg==');margin-top:5px;"></a></li>
+                    <li class="col1 mzr-drop">
+                        <a href="#" class="col1 submenu">ক্যাম্পাস</a>
+                        <div class="drop-one-columns">
+                            <div class="one-col">
+                                <ul class="mzr-links">
+                                    <li><a href="#">আমাদের সম্পর্কে</a></li>
+                                    <li><a href="#">ইতিহাস</a></li>
+                                    <li><a href="#">লক্ষ্য ও উদ্দেশ্য</a></li>
+                                    <li><a href="#">প্রাতিষ্ঠানিক কাঠামো</a></li>
+                                    <li><a href="#">প্রাতিষ্ঠানিক অবকাঠামো</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col4 mzr-drop">
+                        <a href="#" class="col4 submenu">প্রশাসন</a>
+                        <div class="drop-one-columns">
+                            <div class="one-col">
+                                <ul class="mzr-links">
+                                    <li><a href="#">প্রধান শিক্ষক</a></li>
+                                    <li><a href="#">গভর্নিং বডি</a></li>
+                                    <li><a href="#">একাডেমিক কাউন্সিল</a></li>
+                                    <li><a href="#">শিক্ষকদের তালিকা</a></li>
+                                    <li><a href="#">কর্মকর্তাদের তালিকা</a></li>
+                                    <li><a href="#">কর্মচারীদের তালিকা</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col3 mzr-drop">
+                        <a href="#" class="col3 submenu">শ্রেণী তালিকা </a>
+                        <div class="drop-one-columns">
+                            <div class="one-col">
+                                <ul class="mzr-links">
+                                    <li><a href="#">ষষ্ঠ শ্রেণী</a></li>
+
+                                    <li><a href="#">সপ্তম শ্রেণী</a></li>
+
+                                    <li><a href="#">অষ্টম শ্রেণী</a></li>
+
+                                    <li><a href="#">নবম শ্রেণী</a></li>
+
+                                    <li><a href="#">দশম শ্রেণী</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col3 mzr-drop">
+                        <a href="#" class="col3 submenu">অফিস</a>
+                        <div class="drop-one-columns">
+                            <div class="one-col">
+                                <ul class="mzr-links">
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col2 mzr-drop">
+                        <a href="#" class="col2 submenu">ভর্তি</a>
+                        <div class="drop-one-columns">
+                            <div class="one-col">
+                                <ul class="mzr-links">
+                                    <li><a href="#">কিভাবে আবেদন করতে হবে</a></li>
+                                    <li><a href="#">আবেদন</a></li>
+                                    <li><a href="#">ভর্তি পরীক্ষা</a></li>
+                                    <li><a href="#">ভর্তি নীতি</a></li>
+                                    <li><a href="#">বর্তমান শিক্ষা ব্যবস্থা</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col5 mzr-drop">
+                        <a href="#" class="col5 submenu">একাডেমিক কার্যক্রম</a>
+                        <div class="drop-one-columns">
+                            <div class="one-col">
+                                <ul class="mzr-links">
+                                    <li><a href="#">শ্রেণিসূচি</a></li>
+                                    <li><a href="#">অনলাইন শ্রেণিসূচি</a></li>
+                                    <li><a href="#">পরীক্ষার সময়সূচি</a></li>
+                                    <li><a href="#">একাডেমিক সিলেবাস </a></li>
+                                    <li><a href="#">শিক্ষা বর্ষপঞ্জি</a></li>
+                                    <li><a href="#">একাডেমিক প্রসপেক্টর</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col6 mzr-drop">
+                        <a href="#" class="col6 submenu">শিক্ষার্থী</a>
+                        <div class="drop-one-columns">
+                            <div class="one-col">
+                                <ul class="mzr-links">
+                                    <li><a href="#">শিক্ষার্থী ইউনিফর্ম</a></li>
+                                    <li><a href="#">পরীক্ষা ব্যবস্থা</a></li>
+                                    <li><a href="#">নিয়ম এবং প্রবিধান</a></li>
+                                    <li><a href="#">আমাদের শিক্ষার্থী</a></li>
+                                    <li><a href="#">শিক্ষার্থীদের সাফল্যের গল্প</a></li>
+                                    <li><a href="#">উদ্ধাবনী প্রকল্প</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col2 mzr-drop">
+                        <a href="#" class="col2 submenu">ফলাফল</a>
+                        <div class="drop-one-columns">
+                            <div class="one-col">
+                                <ul class="mzr-links">
+                                    <li><a href="#">অভ্যন্তরীণ পরীক্ষার ফলাফল</a></li>
+                                    <li><a href="http://www.educationboardresults.gov.bd/">বোর্ড পরীক্ষার ফলাফল</a></li>
+                                    <li><a href="https://www.nu.ac.bd/results/">জাতীয় বিশ্ববিদ্যালয়ের ফলাফল</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col4 mzr-drop">
+                        <a href="#" class="col4 submenu">রিসোর্স</a>
+                        <div class="drop-one-columns">
+                            <div class="one-col">
+                                <ul class="mzr-links">
+                                    <li><a href="#">গ্রন্থাগার</a></li>
+                                    <li><a href="#">কম্পিউটার ল্যাব</a></li>
+                                    <li><a href="#">খেলার মাঠ</a></li>
+                                    <li><a href="#">আইসিটি ক্লাব</a></li>
+                                    <li><a href="#">বিএনসিসি</a></li>
+                                    <li><a href="#">রেড ক্রিসেন্ট</a></li>
+                                    <li><a href="#">রোভার স্কাউট</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col3 mzr-drop">
+                        <a href="#" class="col3 submenu">গ্যালারি</a>
+                        <div class="drop-one-columns">
+                            <div class="one-col">
+                                <ul class="mzr-links">
+                                    <li><a href="#">ছবি গ্যালারী</a></li>
+                                    <li><a href="#">ভিডিও গ্যালারী</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="col5 mzr-drop">
+                        <a href="#" class="col5 submenu">নোটিশ কর্নার</a>
+                        <div class="drop-one-columns">
+                            <div class="one-col">
+                                <ul class="mzr-links">
+                                    <li><a href="#">সকল নোটিশ</a></li>
+                                    <li><a href="#">সকল অ্যাসাইনমেন্ট</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .right-side-bar .block ul li a {
+        font-size: 14px;
+    }
+
+    #notice-board ul a {
+        font-size: 14px;
+    }
+
+    @@media screen and (min-width: 1400px) {
+        .mainwrapper .box {
+            margin-right: 13px
+        }
+    .meganizr .one-col {
+        width: auto !important;
+        min-width: 150px;
+    }
+    .drop-one-columns .one-col a {
+        display: block;
+        border-bottom: 1px solid #ccc;
+        white-space: nowrap;
+    }
+    .drop-one-columns .one-col a:hover {
+        border-bottom: 1px solid #ccc !important;
+        background-color: #ebccaccf !important;
+    }
+ }
+</style>
+<style type="text/css">
+    @@media only screen and (min-width: : 980px) {
+        .drop-one-columns .one-col a {
+            background-color: transparent;
+            border-bottom: 0px solid #ccc;
+            width: 100%;
+        }
+
+            .drop-one-columns .one-col a:hover {
+                background: transparent !important;
+                border: 0 !important;
+            }
+    }
+</style>
+<script type="text/javascript">
+    $(window).on('load', () => {
+        if ($(window).width() >= 980) {
+            $('.mzr-drop').each((idx, item) => {
+                let submenu = $(item).find('.submenu');
+                let rgb = $(submenu).css('color');
+                let dropdown = submenu.next('.drop-one-columns');
+                dropdown.attr('style', `border-top: 5px solid ${rgb}`)
+            })
+        }
+    })
+</script>
+
+<div id="contents" class="sixteen columns">
+    <div class="twelve columns" id="left-content">
+        <div class="row mainwrapper">
+            <div class="pm">
+                <a href="http://www.padmabridge.gov.bd/" target="_blank">
+                    <img src="~/img/banner/padmabanner.jpeg" width="100%" align="banner">
+                </a>
+            </div>
+            <div class="scroll">
+                <h3>
+                    <marquee direction="left" scrollamount="4" onmouseover="this.stop()" onmouseout="this.start()">
+                        <a href="#">ওসমানপুর প্রাগপুর মাধ্যমিক বিদ্যালয়, আলমডাঙ্গা চুয়াডাঙ্গা।</a>
+                    </marquee>
+                </h3>
+            </div>
+            <style>
+                .pm > a > img {
+                    width: 100%;
+                    height: 380px;
+                }
+
+                .scroll {
+                    background: #E6E7E8;
+                    padding: 5px 0 0 0;
+                }
+
+                    .scroll > h3 {
+                        font-weight: bold;
+                        font-size: 22px;
+                        line-height: 22px;
+                    }
+
+                marquee {
+                    padding: 5px;
+                }
+
+                @@media(max-width: 480px) {
+                    iframe {
+                        height: 215px !important;
+                    }
+
+                    .scroll {
+                        margin: 0 0 40px 0;
+                    }
+
+                    .pm > a > img {
+                        width: 100%;
+                        height: 215px;
+                    }
+                }
+            </style>
+            <script></script>
+            ﻿
+            <div class="row" id="notice-board">
+                <div class="notice-board-bg">
+                    <h2>নোটিশ</h2>
+                    <div id="notice-board-ticker">
+                        <ul style="margin:0">
+                            <li style="margin:1px">
+                                <a href="#" style="margin:0"> “দশম শ্রেণিতে ভর্তি বিষয়ে বিজ্ঞপ্তি <i>(২১-০৯-২০২৩)</i></a>
+                            </li>
+                            <li style="margin:1px">
+                                <a href="#" style="margin:0"> “নবম শ্রেণিতে ভর্তি বিষয়ে বিজ্ঞপ্তি:<i>(২১-০৯-২০২৩)</i></a>
+                            </li>
+                        </ul>
+                        <a class="btn right" href="#">সকল নোটিশ</a>
+                    </div>
+                </div>
+            </div>
+            <style>
+                #notice-board-ticker ul li {
+                    list-style: none;
+                    padding: 8px 0px 0px 10px;
+                    text-justify: inter-word;
+                    width: 100%;
+                }
+            </style>
+            <div style=" background-color: #EFEFEF;border: 1px solid #CCCCCC;margin-bottom: 10px;padding: 5px;" class="row" id="bdes">
+                <h5 style="float:left;margin:-3px 5px 0 0; font-weight:bold;font-size:.9em">খবর:</h5>
+                <div id="bdes-ticker" style="overflow: hidden; position: relative; height: 0px;">
+                    <ul style="font-size: 0.9em; position: absolute; margin: 0px; padding: 0px; width: 85%;">
+                        <li class="lineheight"><a href="notice-view-main.php?id=106">“বঙ্গবন্ধু শেখ মজিব স্কলার “নির্বাচন ও অ্যাওয়াড প্রদান ২০২৩ </a> <i>(২১-০৯-২০২৩)</i></li>
+                        <li class="lineheight"><a href="notice-view-main.php?id=106">বিভাগ পরিবর্তন বিষয়ে বিজ্ঞপ্তি: </a> <i>(২১-০৯-২০২৩)</i></li>
+
+                    </ul>
+                    <div style="float:right">
+                        <a class="btn" href="#">সকল</a>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $(function() {
+                    function initNewsTicker(id, options) {
+
+                        var $scroller = $(id);
+                        $scroller.vTicker('init', options);
+
+                        $("#bdes-ticker .next").click(function(event) {
+                            event.preventDefault();
+                            var checked = true;
+                            $('#bdes-ticker').vTicker('next', { animate: checked });
+                        });
+                        $("#bdes-ticker .prev,#bdes-ticker .next").hover(function() {
+                            $('#bdes-ticker').vTicker('next', { animate: checked });
+                            $scroller.vTicker('pause', true);
+                        }, function() {
+                            $('#bdes-ticker').vTicker('next', { animate: checked });
+                            $scroller.vTicker('pause', false);
+                        });
+                        $("#bdes-ticker .prev").click(function(event) {
+                            event.preventDefault();
+                            var checked = true;
+                            $('#bdes-ticker').vTicker('prev', { animate: checked });
+                        });
+                    }
+
+                    function initNoticeBoardTicker(id, options) {
+
+                        var $scroller = $(id);
+                        $scroller.vTicker('init', options);
+
+                        $("#notice-board-ticker .next").click(function(event) {
+                            event.preventDefault();
+                            var checked = true;
+                            $('#notice-board-ticker').vTicker('next', { animate: false });
+                        });
+                        $("#notice-board-ticker .prev,#notice-board-ticker .next").hover(function() {
+                            $scroller.vTicker('pause', true);
+                        }, function() {
+                            $scroller.vTicker('pause', false);
+                        });
+                        $("#notice-board-ticker .prev").click(function(event) {
+                            event.preventDefault();
+                            var checked = true;
+                            $('#notice-board-ticker').vTicker('prev', { animate: checked });
+                        });
+                    }
+                    initNewsTicker('#bdes-ticker', {});
+                });
+            </script>
+            <style>
+                .lineheight {
+                    line-height: 22px;
+                }
+            </style>
+            <script></script>
+            <div class="row">
+                <div id="box-1" class="six columns service-box box" style="height: auto;">
+                    <h4>ক্যাম্পাস</h4>
+                    <img src="~/img/icon/campus.png" alt="" width="100" height="" />
+                    <ul class="caption fade-caption" style="margin:0">
+                        <li><a href="#">আমাদের সম্পর্কে</a></li>
+                        <li><a href="#">ইতিহাস</a></li>
+                        <li><a href="#">লক্ষ্য ও উদ্দেশ্য</a></li>
+                        <li><a href="#">প্রাতিষ্ঠানিক কাঠামো</a></li>
+                        <li><a href="#">প্রাতিষ্ঠানিক অবকাঠামো</a></li>
+                    </ul>
+                </div>
+                <div id="box-2" class="six columns service-box box" style="height: auto;">
+                    <h4>ভর্তি</h4>
+                    <img src="~/img/icon/admission512x512.png" alt="" width="100" height="" />
+                    <ul class="caption fade-caption" style="margin:0">
+                        <li><a href="#">কিভাবে আবেদন করতে হবে</a></li>
+                        <li><a href="#">আবেদন</a></li>
+                        <li><a href="#">ভর্তি পরীক্ষা</a></li>
+                        <li><a href="#">ভর্তি নীতি</a></li>
+                        <li><a href="#">বর্তমান শিক্ষা ব্যবস্থা</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div id="box-3" class="six columns service-box box" style="height: auto;">
+                    <h4>প্রশাসন</h4>
+                    <img src="~/img/icon/scholarship.png" alt="" width="100" height="" />
+                    <ul class="caption fade-caption" style="margin:0">
+                        <li><a href="#">প্রধান শিক্ষক</a></li>
+                        <li><a href="#">গভর্নিং বডি</a></li>
+                        <li><a href="#">একাডেমিক কাউন্সিল</a></li>
+                        <li><a href="#">শিক্ষকদের তালিকা</a></li>
+                        <li><a href="#">কর্মকর্তাদের তালিকা</a></li>
+                        <li><a href="#">কর্মচারীদের তালিকা</a></li>
+                    </ul>
+                </div>
+                <div id="box-4" class="six columns service-box box" style="height: auto;">
+                    <h4>একাডেমিক কার্যক্রম</h4>
+                    <img src="~/img/icon/academic_paper.png" alt="" width="100" height="" />
+                    <ul class="caption fade-caption" style="margin:0">
+                        <li><a href="#">শ্রেণিসূচি</a></li>
+                        <li><a href="#">অনলাইন শ্রেণিসূচি</a></li>
+                        <li><a href="#">পরীক্ষার সময়সূচি</a></li>
+                        <li><a href="#">একাডেমিক সিলেবাস </a></li>
+                        <li><a href="#">একাডেমিক প্রসপেক্টর</a></li>
+                        <li><a href="#">ফরম</a> </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div id="box-5" class="six columns service-box box" style="height: auto;">
+                    <h4>শিক্ষার্থী</h4>
+                    <img src="~/img/icon/Examination_ex.png" alt="" width="100" height="" />
+                    <ul class="caption fade-caption" style="margin:0">
+                        <li><a href="#">শিক্ষার্থী ইউনিফর্ম</a></li>
+                        <li><a href="#">পরীক্ষা ব্যবস্থা</a></li>
+                        <li><a href="#">নিয়ম এবং প্রবিধান</a></li>
+                        <li><a href="#">আমাদের শিক্ষার্থী</a></li>
+                        <li><a href="#">শিক্ষার্থীদের সাফল্যের গল্প</a></li>
+                    </ul>
+                </div>
+                <div id="box-6" class="six columns service-box box" style="height: auto;">
+                    <h4>ফলাফল</h4>
+                    <img src="~/img/icon/GPA-512.png" alt="" width="100" height="" />
+                    <ul class="caption fade-caption" style="margin:0">
+                        <li><a href="#">অভ্যন্তরীণ পরীক্ষার ফলাফল</a></li>
+                        <li><a href="http://www.educationboardresults.gov.bd/">বোর্ড পরীক্ষার ফলাফল</a></li>
+                        <li><a href="https://www.nu.ac.bd/results/">জাতীয় বিশ্ববিদ্যালয়ের ফলাফল</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div id="box-7" class="six columns service-box box" style="height: auto;">
+                    <h4>রিসোর্স</h4>
+                    <img src="~/img/icon/resources-.png" alt="" width="100" height="" />
+                    <ul class="caption fade-caption" style="margin:0">
+                        <li><a href="#">গ্রন্থাগার</a></li>
+                        <li><a href="#">কম্পিউটার ল্যাব</a></li>
+                        <li><a href="#">খেলার মাঠ</a></li>
+                        <li><a href="#">আইসিটি ক্লাব</a></li>
+                        <li><a href="#">বিএনসিসি</a></li>
+                    </ul>
+                </div>
+                <div id="box-8" class="six columns service-box box" style="height: auto;">
+                    <h4>গ্যালারি</h4>
+                    <img src="~/img/icon/gallery-44-267592.png" alt="" width="100" height="" />
+                    <ul class="caption fade-caption" style="margin:0">
+                        <li><a href="#">ছবি গ্যালারী</a></li>
+                        <li><a href="#">ভিডিও গ্যালারী</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div id="box-7" class="six columns service-box box" style="height: auto;">
+                    <h4>নোটিশ</h4>
+                    <img src="~/img/icon/notice26download.png" alt="" width="100" height="" />
+                    <ul class="caption fade-caption" style="margin:0">
+                        <li><a href="#">নোটিশ</a></li>
+                        <li><a href="#" class="col2">ফরম</a> </li>
+                        <li><a href="#">ইভেন্টস</a></li>
+                    </ul>
+                </div>
+                <div id="box-8" class="six columns service-box box" style="height: auto;">
+                    <h4>শ্রেণী তালিকা </h4>
+                    <img src="~/img/icon/course-list.png" alt="" width="100" height="" />
+                    <ul class="caption fade-caption" style="margin:0">
+                        
+                        <li><a href="#">ষষ্ঠ শ্রেণী</a></li>
+
+                        <li><a href="#">সপ্তম শ্রেণী</a></li>
+
+                        <li><a href="#">অষ্টম শ্রেণী</a></li>
+
+                        <li><a href="#">নবম শ্রেণী</a></li>
+
+                        <li><a href="#">দশম শ্রেণী</a></li>
+                    </ul>
+                </div>
+            </div>
+            <style>
+                #right-content .block {
+                    display: block !important
+                }
+            </style>
+            <br><br>
+            <div class="row">
+                <h4 style="text-align: center;">ভিডিও গ্যালারী</h4>
+                <hr>
+                <div class="six columns" style="text-align: center;">
+                    <div style="padding: 0px;">
+                        <iframe width="310" height="200" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br>
+                    </div>
+                </div>
+                <div class="six columns" style="text-align: center;">
+                    <div style="padding: 0px;">
+                        <iframe width="310" height="200" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> <br>
+                    </div>
+                </div>
+
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="four columns right-side-bar" id="right-content">
+
+        <div class="column block">
+
+
+            <h5 class="bk-org title" style="text-align: center;">সভাপতি</h5>
+            <p style="text-align:center">
+                <img alt="Principal" src="~/img/profile/avatar.jpg" style="border-style:solid; border-width:0px; height:176px; margin-left:40px; margin-right:40px; width:150px" />
+            </p>
+            <p style="text-align:center">
+                <strong>
+                    <a href="speech.php">
+                        <span style="color:#000000">মোঃ তানসেন আলী </span>
+                    </a>
+                </strong>
+            </p>
+            <p style="text-align:center">
+                <strong style="text-align:center">সভাপতি, গভর্নিং বডি, ওসমানপুর প্রাগপুর মাধ্যমিক বিদ্যালয়</strong>
+            </p>
+            <p style="text-align:center;text-decoration:underline;color: Orange;font-size:16px;list-style:none"><a href="#"><strong style="color:Tomato">Details</strong></a></p>
+            <p>
+            </p>
+        </div>
+        <div class="column block">
+            <h5 class="bk-org title" style="text-align: center;">প্রধান শিক্ষক</h5>
+            <p style="text-align:center">
+                <img alt="Principal" src="~/img/profile/avatar.jpg" style="border-style:solid; border-width:0px; height:176px; margin-left:40px; margin-right:40px; width:150px" />
+            </p>
+            <p style="text-align:center">
+                <strong>
+                    <a href="speech.php">
+                        <span style="color:#000000">মোঃ আব্দুল হাই</span>
+                    </a>
+                </strong>
+            </p>
+            <p style="text-align:center">
+                <strong>প্রধান শিক্ষক, ওসমানপুর প্রাগপুর মাধ্যমিক বিদ্যালয়</strong>
+            </p>
+            <p style="text-align:center;text-decoration:underline;color: Orange;font-size:16px;list-style:none"><a href="#"><strong style="color:Tomato">Details</strong></a></p>
+            <p>
+            </p>
+        </div>
+
+        <style>
+            #right-content .block {
+                display: block !important
+            }
+        </style>
+        <div class="column block">
+
+            <p>
+            </p>
+        </div>
+        <style>
+            #right-content .block {
+                display: block !important
+            }
+        </style>
+        <div class="column block">
+            <h5 class="bk-org title" style="text-align: center;  font-size: 15px">সুবর্ণ জয়ন্তী কর্ণার</h5>
+            <ul>
+                <li style="text-align:center">
+                    <a href="id50_albam_photo.php?id=1">
+                        <img alt="imp_hotline" src="~/img/imphotline/id50.png" style="border-style:solid; border-width:0px; height:80px; margin-left:40px; margin-right:40px; width:120px" />
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="column block">
+            <h5 class="bk-org title" style="text-align: center;">গুরুত্বপূর্ণ লিঙ্ক</h5>
+            <ul>
+                <li>
+                    <a href="https://moedu.gov.bd/" style="margin:0"> শিক্ষা মন্ত্রণালয়</a>
+                </li>
+                <li>
+                    <a href="https://www.jessoreboard.gov.bd/" style="margin:0"> মাধ্যমিক ও উচ্চ মাধ্যমিক শিক্ষা বোর্ড, যশোর</a>
+                </li>
+                <li>
+                    <a href="https://bteb.gov.bd/" style="margin:0"> বাংলাদেশ কারিগরি শিক্ষা বোর্ড</a>
+                </li>
+                <li>
+                    <a href="http://www.pmeat.gov.bd/" style="margin:0"> প্রধানমন্ত্রীর শিক্ষা সহায়তা ট্রাস্ট</a>
+                </li>
+                <li>
+                    <a href="https://pmo.gov.bd/" style="margin:0"> প্রধানমন্ত্রীর কার্যালয়</a>
+                </li>
+                <li>
+                    <a href="https://cabinet.gov.bd/" style="margin:0"> মন্ত্রিপরিষদ বিভাগ</a>
+                </li>
+            </ul>
+        </div>
+        <div class="column block">
+            <h5 class="bk-org title" style="text-align: center;">জাতীয় সংগীত</h5>
+            <ul>
+                <li>
+                    <audio controls="" style="width:100%">
+                        <source src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Amar_Sonar_Bangla_-_official_vocal_music_of_the_National_anthem_of_Bangladesh.ogg" type="audio/mp3">
+                    </audio>
+                </li>
+            </ul>
+        </div>
+        <div class="column block">
+            <h5 class="bk-org title" style="text-align: center;">জরুরি হটলাইন</h5>
+            <ul>
+                <p style="text-align:center">
+                    <a>
+                        <img alt="imp_hotline" src="~/img/imphotline/helphotline.jpg" style="border-style:solid; border-width:0px; height:390px; margin-left:15px; margin-right:40px; width:190px" />
+                    </a>
+                </p>
+            </ul>
+        </div>
+        <div class="column block">
+            <h5 class="bk-org title" style="text-align: center;">আমার সরকার</h5>
+            <ul>
+                <p style="text-align:center">
+                    <a href="https://www.mygov.bd/">
+                        <img alt="imp_hotline" src="~/img/imphotline/my_gov.png" style="border-style:solid; border-width:0px; height:110px; margin-left:40px; margin-right:40px; width:140px" />
+                    </a>
+                </p>
+            </ul>
+        </div>
+        <div class="column block">
+            <h5 class="bk-org title" style="text-align: center;">ছবি গ্যালায়ী</h5>
+            <ul>
+                <p style="text-align:center">
+                    <a href="#">
+                        <img alt="imp_hotline" src="~/img/imphotline/albumicon.png" style="border-style:solid; border-width:0px; height:120px; margin-left:40px; margin-right:40px; width:120px" />
+                    </a>
+                </p>
+            </ul>
+        </div>
+
+        <div class="column block">
+            <h5 class="bk-org title"> সামাজিক যোগাযোগ </h5>
+            <a href="#" target="_blank" class="share-buttons">
+                <img src="~/img/logo/facebook.png" alt="" />
+            </a>
+            <a href="#" target="_blank" class="share-buttons">
+                <img src="~/img/logo/youtube.png" alt="ইউটিউব" />
+            </a>
+            <a href="#" target="_blank" class="share-buttons">
+                <img src="~/img/logo/twitter.png" alt="টুইটার" />
+            </a>
+        </div>
+
+    </div>
+    <div class="clearfix"></div>
+    <style>
+        .share-buttons img {
+            width: 30px;
+            padding: 2px;
+            border: 0;
+            box-shadow: 0;
+            display: inline;
+        }
+    </style>
+</div>
+<script type="text/javascript">
+    window.addEventListener('scroll', function() {
+        let navbar = document.getElementById("nav_mn");
+
+        if (window.pageYOffset >= 223) {
+            navbar.classList.add('sticky');
+        } else {
+            navbar.classList.remove('sticky');
+        }
+    });
+</script>
