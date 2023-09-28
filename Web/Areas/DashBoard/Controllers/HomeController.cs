@@ -2,8 +2,9 @@
 using System.Diagnostics;
 using Web.Models;
 
-namespace Web.Controllers
+namespace Web.Areas.DashBoard.Controllers
 {
+    [Area("DashBoard")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

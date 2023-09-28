@@ -98,10 +98,10 @@
 }
 @media only screen and (min-width: 960px) {
 	body{
-		background: url("../images/bg/bg_main.gif") repeat-y scroll center top rgba(0, 0, 0, 0);
+		background: url("../img/bg/bg_main.gif") repeat-y scroll center top rgba(0, 0, 0, 0);
 	}
 	.footer-artwork {
-		background: url("../images/bg/footer_top_bg.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+		background: url("../img/bg/footer_top_bg.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
 		height: 84px;
 		margin: 0 auto;
 		width: 1020px;
@@ -134,7 +134,7 @@
 		background-color: #666;
 	}
 	#notice-board{
-				background: url("../images/bg/welcome_grad.png") repeat-x scroll center bottom #EBEBEB;
+				background: url("../img/bg/welcome_grad.png") repeat-x scroll center bottom #EBEBEB;
 				border: 1px solid #DDDDDD;
 				height: 172px;
 				font-size: .8em;

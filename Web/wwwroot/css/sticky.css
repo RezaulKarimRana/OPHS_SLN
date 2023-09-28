@@ -4,7 +4,7 @@
         top: 0;
         width: 100%;
         display: contents;
-        background-image: url("../images/logo/sticky_logo1.png");
+        background-image: url("../img/logo/sticky_logo1.png");
         background-repeat: no-repeat;
         background-size: 330px 62px;
         background-position: center top;
@@ -22,7 +22,7 @@
         top: 0;
         width: 100%;
         display: contents;
-        background-image: url("../images/logo/sticky_logo.png");
+        background-image: url("../img/logo/sticky_logo.png");
         background-repeat: no-repeat;
         background-size: 600px 50px;
         background-position: center top;
