@@ -1,8 +1,8 @@
-﻿using Education.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using Web.Models;
 
-namespace Education.Controllers
+namespace Web.Controllers
 {
     public class HomeController : Controller
     {
