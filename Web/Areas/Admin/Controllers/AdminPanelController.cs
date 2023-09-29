@@ -9,5 +9,13 @@ namespace Web.Areas.Admin.Controllers
         {
             return View();
         }
+        public IActionResult Banner()
+        {
+            return View();
+        }
+        public IActionResult MegaBanner()
+        {
+            return View();
+        }
     }
 }
