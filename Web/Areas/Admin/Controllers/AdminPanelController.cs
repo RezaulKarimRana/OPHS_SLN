@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Web.Data;
 
 namespace Web.Areas.Admin.Controllers
@@ -26,19 +27,23 @@ namespace Web.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> UploadBanner(IFormFile banner)
+        public async Task<IActionResult> UploadBanner(IFormFile banner, int id)
         {
             if(banner == null)
             {
                 return Ok();
             }
-            var name = Path.Combine(_environment.WebRootPath + "\\img\\banner", DateTime.Now.Millisecond.ToString() + "_" +Path.GetFileName(banner.FileName));
+            var path = Path.Combine(_environment.WebRootPath + "\\img\\banner", DateTime.Now.Millisecond.ToString() + "_" +Path.GetFileName(banner.FileName));
             try
             {
-                using (Stream fileStream = new FileStream(name, FileMode.Create))
+                using (Stream fileStream = new FileStream(path, FileMode.Create))
                 {
                     await banner.CopyToAsync(fileStream);
                 }
+                var data = await _context.Banner.Where(x => x.Id == id).FirstOrDefaultAsync();
+                data.Path = path;
+                _context.Banner.Update(data);
+                await _context.SaveChangesAsync();
             }
             catch(Exception ex)
             {
