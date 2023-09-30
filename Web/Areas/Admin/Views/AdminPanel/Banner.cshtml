@@ -1,4 +1,5 @@
-﻿<style type="text/css">
+﻿@model BannerVM;
+<style type="text/css">
     .imgBanner{
         float: right;
         padding: 10px;
@@ -19,7 +20,7 @@
   <tbody style="text-align:center">
     <tr>
       <th scope="row">1</th>
-      <td><img src="~/img/banner/1.jpg" width="350" height="200" /></td>
+      <td><img src=@Model.Banner1Src width="350" height="200" /></td>
       <td>
           <input type="file" id="banner1">
           <button id="bannerChangeBtn1" class="btn btn-secondary btn-sm imgBanner">ব্যানার পরিবর্তন করুন</button>
@@ -27,7 +28,7 @@
     </tr>
     <tr>
       <th scope="row">2</th>
-      <td><img src="~/img/banner/2.jpg" width="350" height="200" /></td>
+      <td><img src=@Model.Banner2Src width="350" height="200" /></td>
       <td>
           <input type="file" id="banner2">
           <button id="bannerChangeBtn2" class="btn btn-secondary btn-sm imgBanner">ব্যানার পরিবর্তন করুন</button>
@@ -35,7 +36,7 @@
     </tr>
     <tr>
       <th scope="row">3</th>
-      <td><img src="~/img/banner/3.jpg" width="350" height="200" /></td>
+      <td><img src=@Model.Banner3Src width="350" height="200" /></td>
       <td>
           <input type="file" id="banner3">
           <button id="bannerChangeBtn3" class="btn btn-secondary btn-sm imgBanner">ব্যানার পরিবর্তন করুন</button>
@@ -43,7 +44,7 @@
     </tr>
     <tr>
       <th scope="row">4</th>
-      <td><img src="~/img/banner/4.jpg" width="350" height="200" /></td>
+      <td><img src=@Model.Banner4Src width="350" height="200" /></td>
       <td>
           <input type="file" id="banner4">
           <button id="bannerChangeBtn4" class="btn btn-secondary btn-sm imgBanner">ব্যানার পরিবর্তন করুন</button>
@@ -51,7 +52,7 @@
     </tr>
     <tr>
       <th scope="row">5</th>
-      <td><img src="~/img/banner/5.jpg" width="350" height="200" /></td>
+      <td><img src=@Model.Banner5Src width="350" height="200" /></td>
       <td>
           <input type="file" id="banner5">
           <button id="bannerChangeBtn5" class="btn btn-secondary btn-sm imgBanner">ব্যানার পরিবর্তন করুন</button>
@@ -59,7 +60,7 @@
     </tr>
     <tr>
       <th scope="row">6</th>
-      <td><img src="~/img/banner/6.jpeg" width="350" height="200" /></td>
+      <td><img src=@Model.Banner6Src width="350" height="200" /></td>
       <td>
           <input type="file" id="banner6">
           <button id="bannerChangeBtn6" class="btn btn-secondary btn-sm imgBanner">ব্যানার পরিবর্তন করুন</button>

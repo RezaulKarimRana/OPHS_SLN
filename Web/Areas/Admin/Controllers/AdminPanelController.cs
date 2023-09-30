@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Data;
+using Web.Models;
 
 namespace Web.Areas.Admin.Controllers
 {
@@ -18,9 +19,17 @@ namespace Web.Areas.Admin.Controllers
         {
             return View();
         }
-        public IActionResult Banner()
+        public async Task<IActionResult> Banner()
         {
-            return View();
+            var banner = await _context.Banner.ToListAsync();
+            var dashBoardModel = new BannerVM();
+            dashBoardModel.Banner1Src = banner[0].Path;
+            dashBoardModel.Banner2Src = banner[1].Path;
+            dashBoardModel.Banner3Src = banner[3].Path;
+            dashBoardModel.Banner4Src = banner[3].Path;
+            dashBoardModel.Banner5Src = banner[4].Path;
+            dashBoardModel.Banner6Src = banner[5].Path;
+            return View(dashBoardModel);
         }
         public IActionResult MegaBanner()
         {
@@ -33,21 +42,23 @@ namespace Web.Areas.Admin.Controllers
             {
                 return Ok();
             }
-            var path = Path.Combine(_environment.WebRootPath + "\\img\\banner", DateTime.Now.Millisecond.ToString() + "_" +Path.GetFileName(banner.FileName));
             try
             {
-                using (Stream fileStream = new FileStream(path, FileMode.Create))
+                string base64Image = "data:image/jpeg;base64,";
+                using (var ms = new MemoryStream())
                 {
-                    await banner.CopyToAsync(fileStream);
+                    banner.CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    base64Image += Convert.ToBase64String(fileBytes);
                 }
                 var data = await _context.Banner.Where(x => x.Id == id).FirstOrDefaultAsync();
-                data.Path = path;
+                data.Path = base64Image;
                 _context.Banner.Update(data);
                 await _context.SaveChangesAsync();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return Ok();
+                return Ok(ex.Message);
             }
             return Json(null);
         }

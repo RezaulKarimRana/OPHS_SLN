@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using Web.Data;
 using Web.Models;
 
 namespace Web.Areas.DashBoard.Controllers
@@ -8,15 +10,24 @@ namespace Web.Areas.DashBoard.Controllers
     public class DashboardController : Controller
     {
         private readonly ILogger<DashboardController> _logger;
-
-        public DashboardController(ILogger<DashboardController> logger)
+        private ApplicationDbContext _context;
+        public DashboardController(ApplicationDbContext context, ILogger<DashboardController> logger)
         {
             _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var banner = await _context.Banner.ToListAsync();
+            var dashBoardModel = new DashBoardVM();
+            dashBoardModel.Banner1Src = banner[0].Path;
+            dashBoardModel.Banner2Src = banner[1].Path;
+            dashBoardModel.Banner3Src = banner[3].Path;
+            dashBoardModel.Banner4Src = banner[3].Path;
+            dashBoardModel.Banner5Src = banner[4].Path;
+            dashBoardModel.Banner6Src = banner[5].Path;
+            return View(dashBoardModel);
         }
 
         public IActionResult Privacy()
