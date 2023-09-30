@@ -1,1 +1,303 @@
-﻿Bannaer
+﻿<style type="text/css">
+    .imgBanner{
+        float: right;
+        padding: 10px;
+        margin-top: 10px;
+        margin-right: 30px;
+    }
+</style>
+<h2>ব্যানার তালিকা</h2>
+<p>ব্যানার পরিবর্তন করতে চাইলে নতুন ব্যানার আপলোড করে "ব্যানার পরিবর্তন করুন" বাটনে ক্লিক করুন</p>
+<table class="table table-bordered table-striped">
+  <thead style="text-align:center">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ব্যানার</th>
+      <th scope="col">নতুন ব্যানার</th>
+    </tr>
+  </thead>
+  <tbody style="text-align:center">
+    <tr>
+      <th scope="row">1</th>
+      <td><img src="~/img/banner/1.jpg" width="350" height="200" /></td>
+      <td>
+          <input type="file" id="banner1">
+          <button id="bannerChangeBtn1" class="btn btn-secondary btn-sm imgBanner">ব্যানার পরিবর্তন করুন</button>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td><img src="~/img/banner/2.jpg" width="350" height="200" /></td>
+      <td>
+          <input type="file" id="banner2">
+          <button id="bannerChangeBtn2" class="btn btn-secondary btn-sm imgBanner">ব্যানার পরিবর্তন করুন</button>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td><img src="~/img/banner/3.jpg" width="350" height="200" /></td>
+      <td>
+          <input type="file" id="banner3">
+          <button id="bannerChangeBtn3" class="btn btn-secondary btn-sm imgBanner">ব্যানার পরিবর্তন করুন</button>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td><img src="~/img/banner/4.jpg" width="350" height="200" /></td>
+      <td>
+          <input type="file" id="banner4">
+          <button id="bannerChangeBtn4" class="btn btn-secondary btn-sm imgBanner">ব্যানার পরিবর্তন করুন</button>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">5</th>
+      <td><img src="~/img/banner/5.jpg" width="350" height="200" /></td>
+      <td>
+          <input type="file" id="banner5">
+          <button id="bannerChangeBtn5" class="btn btn-secondary btn-sm imgBanner">ব্যানার পরিবর্তন করুন</button>
+      </td>
+    </tr>
+    <tr>
+      <th scope="row">6</th>
+      <td><img src="~/img/banner/6.jpeg" width="350" height="200" /></td>
+      <td>
+          <input type="file" id="banner6">
+          <button id="bannerChangeBtn6" class="btn btn-secondary btn-sm imgBanner">ব্যানার পরিবর্তন করুন</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#bannerChangeBtn1").hide();
+            $("#bannerChangeBtn2").hide();
+            $("#bannerChangeBtn3").hide();
+            $("#bannerChangeBtn4").hide();
+            $("#bannerChangeBtn5").hide();
+            $("#bannerChangeBtn6").hide();
+        });
+        $("#banner1").change(function(e) {
+            for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+        
+                var file = e.originalEvent.srcElement.files[i];
+        
+                var img = document.createElement("img");
+                var reader = new FileReader();
+                reader.onloadend = function() {
+                     img.src = reader.result;
+                     img.width = 350;
+                     img.height = 200;
+                }
+                reader.readAsDataURL(file);
+                $("#banner1").after(img);
+                $("#bannerChangeBtn1").show();
+            }
+        });
+        $("#banner2").change(function(e) {
+            for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+        
+                var file = e.originalEvent.srcElement.files[i];
+        
+                var img = document.createElement("img");
+                var reader = new FileReader();
+                reader.onloadend = function() {
+                     img.src = reader.result;
+                     img.width = 350;
+                     img.height = 200;
+                }
+                reader.readAsDataURL(file);
+                $("#banner2").after(img);
+                $("#bannerChangeBtn2").show();
+            }
+        });
+        $("#banner3").change(function(e) {
+            for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+        
+                var file = e.originalEvent.srcElement.files[i];
+        
+                var img = document.createElement("img");
+                var reader = new FileReader();
+                reader.onloadend = function() {
+                     img.src = reader.result;
+                     img.width = 350;
+                     img.height = 200;
+                }
+                reader.readAsDataURL(file);
+                $("#banner3").after(img);
+                $("#bannerChangeBtn3").show();
+            }
+        });
+        $("#banner4").change(function(e) {
+            for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+        
+                var file = e.originalEvent.srcElement.files[i];
+        
+                var img = document.createElement("img");
+                var reader = new FileReader();
+                reader.onloadend = function() {
+                     img.src = reader.result;
+                     img.width = 350;
+                     img.height = 200;
+                }
+                reader.readAsDataURL(file);
+                $("#banner4").after(img);
+                $("#bannerChangeBtn4").show();
+            }
+        });
+        $("#banner5").change(function(e) {
+            for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+        
+                var file = e.originalEvent.srcElement.files[i];
+        
+                var img = document.createElement("img");
+                var reader = new FileReader();
+                reader.onloadend = function() {
+                     img.src = reader.result;
+                     img.width = 350;
+                     img.height = 200;
+                }
+                reader.readAsDataURL(file);
+                $("#banner5").after(img);
+                $("#bannerChangeBtn5").show();
+            }
+        });
+        $("#banner6").change(function(e) {
+            for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+        
+                var file = e.originalEvent.srcElement.files[i];
+        
+                var img = document.createElement("img");
+                var reader = new FileReader();
+                reader.onloadend = function() {
+                     img.src = reader.result;
+                     img.width = 350;
+                     img.height = 200;
+                }
+                reader.readAsDataURL(file);
+                $("#banner6").after(img);
+                $("#bannerChangeBtn6").show();
+            }
+        });
+        $("#bannerChangeBtn1").click(function() {
+             var formData = new FormData();
+             var totalFiles = document.getElementById("banner1").files.length;
+             for (var i = 0; i < totalFiles; i++) {
+               var file = document.getElementById("banner1").files[i];
+               formData.append("banner", file);
+             }
+             $.ajax({
+                   type: "POST",
+                   url: '/Admin/AdminPanel/UploadBanner',
+                   data: formData,
+                   dataType: 'json',
+                   contentType: false,
+                   processData: false,
+                   success: function (response) {
+                    if (response != null) {
+                    }
+                   }
+             });
+         });
+        $("#bannerChangeBtn2").click(function() {
+             var formData = new FormData();
+             var totalFiles = document.getElementById("banner2").files.length;
+             for (var i = 0; i < totalFiles; i++) {
+               var file = document.getElementById("banner2").files[i];
+               formData.append("banner", file);
+             }
+             $.ajax({
+                   type: "POST",
+                   url: '/Admin/AdminPanel/UploadBanner',
+                   data: formData,
+                   dataType: 'json',
+                   contentType: false,
+                   processData: false,
+                   success: function (response) {
+                    if (response != null) {
+                    }
+                   }
+             });
+         });
+        $("#bannerChangeBtn3").click(function() {
+             var formData = new FormData();
+             var totalFiles = document.getElementById("banner3").files.length;
+             for (var i = 0; i < totalFiles; i++) {
+               var file = document.getElementById("banner3").files[i];
+               formData.append("banner", file);
+             }
+             $.ajax({
+                   type: "POST",
+                   url: '/Admin/AdminPanel/UploadBanner',
+                   data: formData,
+                   dataType: 'json',
+                   contentType: false,
+                   processData: false,
+                   success: function (response) {
+                    if (response != null) {
+                    }
+                   }
+             });
+         });
+        $("#bannerChangeBtn4").click(function() {
+             var formData = new FormData();
+             var totalFiles = document.getElementById("banner4").files.length;
+             for (var i = 0; i < totalFiles; i++) {
+               var file = document.getElementById("banner4").files[i];
+               formData.append("banner", file);
+             }
+             $.ajax({
+                   type: "POST",
+                   url: '/Admin/AdminPanel/UploadBanner',
+                   data: formData,
+                   dataType: 'json',
+                   contentType: false,
+                   processData: false,
+                   success: function (response) {
+                    if (response != null) {
+                    }
+                   }
+             });
+         });
+        $("#bannerChangeBtn5").click(function() {
+             var formData = new FormData();
+             var totalFiles = document.getElementById("banner5").files.length;
+             for (var i = 0; i < totalFiles; i++) {
+               var file = document.getElementById("banner5").files[i];
+               formData.append("banner", file);
+             }
+             $.ajax({
+                   type: "POST",
+                   url: '/Admin/AdminPanel/UploadBanner',
+                   data: formData,
+                   dataType: 'json',
+                   contentType: false,
+                   processData: false,
+                   success: function (response) {
+                    if (response != null) {
+                    }
+                   }
+             });
+         });
+        $("#bannerChangeBtn6").click(function() {
+             var formData = new FormData();
+             var totalFiles = document.getElementById("banner6").files.length;
+             for (var i = 0; i < totalFiles; i++) {
+               var file = document.getElementById("banner6").files[i];
+               formData.append("banner", file);
+             }
+             $.ajax({
+                   type: "POST",
+                   url: '/Admin/AdminPanel/UploadBanner',
+                   data: formData,
+                   dataType: 'json',
+                   contentType: false,
+                   processData: false,
+                   success: function (response) {
+                    if (response != null) {
+                    }
+                   }
+             });
+         });
+    </script>
+}
