@@ -31,7 +31,11 @@ namespace Web.Areas.Admin.Controllers
             dashBoardModel.Banner6Src = banner[5].Path;
             return View(dashBoardModel);
         }
-        public IActionResult MegaBanner()
+        public IActionResult HeadMaster()
+        {
+            return View();
+        }
+        public IActionResult Chairman()
         {
             return View();
         }
