@@ -48,11 +48,10 @@
                     <h4>ক্যাম্পাস</h4>
                     <img src="~/img/icon/campus.png" alt="" width="100" height="" />
                     <ul class="caption fade-caption" style="margin:0">
-                        <li><a href="#">আমাদের সম্পর্কে</a></li>
-                        <li><a href="#">ইতিহাস</a></li>
-                        <li><a href="#">লক্ষ্য ও উদ্দেশ্য</a></li>
-                        <li><a href="#">প্রাতিষ্ঠানিক কাঠামো</a></li>
-                        <li><a href="#">প্রাতিষ্ঠানিক অবকাঠামো</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Campus" asp-action="AboutOurs">আমাদের সম্পর্কে</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Campus" asp-action="History">ইতিহাস</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Campus" asp-action="Aims">লক্ষ্য ও উদ্দেশ্য</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Campus" asp-action="InstitutionalStructure">প্রাতিষ্ঠানিক কাঠামো</a></li>
                     </ul>
                 </div>
                 <div id="box-2" class="six columns service-box box" style="height: auto;">
@@ -72,12 +71,12 @@
                     <h4>প্রশাসন</h4>
                     <img src="~/img/icon/scholarship.png" alt="" width="100" height="" />
                     <ul class="caption fade-caption" style="margin:0">
-                        <li><a href="#">প্রধান শিক্ষক</a></li>
-                        <li><a href="#">গভর্নিং বডি</a></li>
-                        <li><a href="#">একাডেমিক কাউন্সিল</a></li>
-                        <li><a href="#">শিক্ষকদের তালিকা</a></li>
-                        <li><a href="#">কর্মকর্তাদের তালিকা</a></li>
-                        <li><a href="#">কর্মচারীদের তালিকা</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Administration" asp-action="HeadMaster">প্রধান শিক্ষক</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Administration" asp-action="GoverningBody">গভর্নিং বডি</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Administration" asp-action="AcademicCouncil">একাডেমিক কাউন্সিল</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Administration" asp-action="TeacherList">শিক্ষকদের তালিকা</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Administration" asp-action="OfficialsList">কর্মকর্তাদের তালিকা</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Administration" asp-action="EmployeeList">কর্মচারীদের তালিকা</a></li>
                     </ul>
                 </div>
                 <div id="box-4" class="six columns service-box box" style="height: auto;">
@@ -150,16 +149,11 @@
                     <h4>শ্রেণী তালিকা </h4>
                     <img src="~/img/icon/course-list.png" alt="" width="100" height="" />
                     <ul class="caption fade-caption" style="margin:0">
-                        
-                        <li><a href="#">ষষ্ঠ শ্রেণী</a></li>
-
-                        <li><a href="#">সপ্তম শ্রেণী</a></li>
-
-                        <li><a href="#">অষ্টম শ্রেণী</a></li>
-
-                        <li><a href="#">নবম শ্রেণী</a></li>
-
-                        <li><a href="#">দশম শ্রেণী</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Class" asp-action="Six">ষষ্ঠ শ্রেণী</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Class" asp-action="Seven">সপ্তম শ্রেণী</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Class" asp-action="Eight">অষ্টম শ্রেণী</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Class" asp-action="Nine">নবম শ্রেণী</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Class" asp-action="Ten">দশম শ্রেণী</a></li>
                     </ul>
                 </div>
             </div>
