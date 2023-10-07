@@ -1,21 +1,8 @@
-@import url(stylesheet.css);
-
 *{
     padding:0;
     margin:0;
     font-family: kalpurushregular!important;
 }
-/*.sticky{
-        position: fixed !important;
-        position: relative;
-        top: 0;
-        width: 100%;
-          display: contents;
-          border: 2px solid red;
-          background-color: red;
-          padding: 10px;
-          width: 200px;
-}*/
 .footer-wrapper {
 	background-color:#EBEBEB;
 	height: 110px;
@@ -144,15 +131,6 @@
 				font-size: 1.5em;
 			}
 }
-/*<style type="text/css">
-    .sticky{
-        position: fixed !important;
-        top: 0;
-        width: 100%;
-        height: 200px;
-        background-color: lightblue;
-    }
-</style>*/
 /* Tablet Portrait size to standard 960 (devices and browsers) */
 @media only screen and (min-width: 768px) and (max-width: 959px) {}
 
