@@ -58,11 +58,11 @@
                     <h4>ভর্তি</h4>
                     <img src="~/img/icon/admission512x512.png" alt="" width="100" height="" />
                     <ul class="caption fade-caption" style="margin:0">
-                        <li><a href="#">কিভাবে আবেদন করতে হবে</a></li>
-                        <li><a href="#">আবেদন</a></li>
-                        <li><a href="#">ভর্তি পরীক্ষা</a></li>
-                        <li><a href="#">ভর্তি নীতি</a></li>
-                        <li><a href="#">বর্তমান শিক্ষা ব্যবস্থা</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Admission" asp-action="HowToApply">কিভাবে আবেদন করতে হবে</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Admission" asp-action="Application">আবেদন</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Admission" asp-action="AdmissionTest">ভর্তি পরীক্ষা</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Admission" asp-action="AdmissionRules">ভর্তি নীতি</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Admission" asp-action="CurrentAdmissionStructure">বর্তমান শিক্ষা ব্যবস্থা</a></li>
                     </ul>
                 </div>
             </div>
@@ -83,12 +83,12 @@
                     <h4>একাডেমিক কার্যক্রম</h4>
                     <img src="~/img/icon/academic_paper.png" alt="" width="100" height="" />
                     <ul class="caption fade-caption" style="margin:0">
-                        <li><a href="#">শ্রেণিসূচি</a></li>
-                        <li><a href="#">অনলাইন শ্রেণিসূচি</a></li>
-                        <li><a href="#">পরীক্ষার সময়সূচি</a></li>
-                        <li><a href="#">একাডেমিক সিলেবাস </a></li>
-                        <li><a href="#">একাডেমিক প্রসপেক্টর</a></li>
-                        <li><a href="#">ফরম</a> </li>
+                        <li><a asp-area="DashBoard" asp-controller="AcademicWork" asp-action="Schedule">শ্রেণিসূচি</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="AcademicWork" asp-action="OnlineSchedule">অনলাইন শ্রেণিসূচি</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="AcademicWork" asp-action="AdmissionSchedule">পরীক্ষার সময়সূচি</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="AcademicWork" asp-action="AcademicSyllabus">একাডেমিক সিলেবাস</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="AcademicWork" asp-action="EducationCalendar">শিক্ষা বর্ষপঞ্জি</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="AcademicWork" asp-action="Prospectus">একাডেমিক প্রসপেক্টর</a></li>
                     </ul>
                 </div>
             </div>
@@ -109,7 +109,7 @@
                     <h4>ফলাফল</h4>
                     <img src="~/img/icon/GPA-512.png" alt="" width="100" height="" />
                     <ul class="caption fade-caption" style="margin:0">
-                        <li><a href="#">অভ্যন্তরীণ পরীক্ষার ফলাফল</a></li>
+                        <li><a href="http://result.jessoreboard.gov.bd/">যশোর বোর্ডের ফলাফল</a></li>
                         <li><a href="http://www.educationboardresults.gov.bd/">বোর্ড পরীক্ষার ফলাফল</a></li>
                         <li><a href="https://www.nu.ac.bd/results/">জাতীয় বিশ্ববিদ্যালয়ের ফলাফল</a></li>
                     </ul>
@@ -120,19 +120,21 @@
                     <h4>রিসোর্স</h4>
                     <img src="~/img/icon/resources-.png" alt="" width="100" height="" />
                     <ul class="caption fade-caption" style="margin:0">
-                        <li><a href="#">গ্রন্থাগার</a></li>
-                        <li><a href="#">কম্পিউটার ল্যাব</a></li>
-                        <li><a href="#">খেলার মাঠ</a></li>
-                        <li><a href="#">আইসিটি ক্লাব</a></li>
-                        <li><a href="#">বিএনসিসি</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Resource" asp-action="Library">গ্রন্থাগার</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Resource" asp-action="ComputerLab">কম্পিউটার ল্যাব</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Resource" asp-action="PlayGround">খেলার মাঠ</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Resource" asp-action="IctClub">আইসিটি ক্লাব</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Resource" asp-action="Bncc">বিএনসিসি</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Resource" asp-action="RedCrescent">রেড ক্রিসেন্ট</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Resource" asp-action="RoverScoutt">রোভার স্কাউট</a></li>
                     </ul>
                 </div>
                 <div id="box-8" class="six columns service-box box" style="height: auto;">
                     <h4>গ্যালারি</h4>
                     <img src="~/img/icon/gallery-44-267592.png" alt="" width="100" height="" />
                     <ul class="caption fade-caption" style="margin:0">
-                        <li><a href="#">ছবি গ্যালারী</a></li>
-                        <li><a href="#">ভিডিও গ্যালারী</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Gallery" asp-action="Image">ছবি গ্যালারী</a></li>
+                         <li><a asp-area="DashBoard" asp-controller="Gallery" asp-action="Vedio">ভিডিও গ্যালারী</a></li>
                     </ul>
                 </div>
             </div>
@@ -141,9 +143,8 @@
                     <h4>নোটিশ</h4>
                     <img src="~/img/icon/notice26download.png" alt="" width="100" height="" />
                     <ul class="caption fade-caption" style="margin:0">
-                        <li><a href="#">নোটিশ</a></li>
-                        <li><a href="#" class="col2">ফরম</a> </li>
-                        <li><a href="#">ইভেন্টস</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Notice" asp-action="AllNotice">সকল নোটিশ</a></li>
+                        <li><a asp-area="DashBoard" asp-controller="Notice" asp-action="AllAssignment">সকল অ্যাসাইনমেন্ট</a></li>
                     </ul>
                 </div>
                 <div id="box-8" class="six columns service-box box" style="height: auto;">

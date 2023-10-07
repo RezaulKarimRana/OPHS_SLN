@@ -31,6 +31,17 @@
     <link href="~/css/accessibility.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/layoutHome.css" rel="stylesheet" asp-append-version="true" />
 </head>
+<style type="text/css">
+    .drop-one-columns .one-col a {
+        display: block;
+        border-bottom: 1px solid #ccc;
+        white-space: nowrap;
+    }
+    .drop-one-columns .one-col a:hover {
+        border-bottom: 1px solid #ccc !important;
+        background-color: #ebccaccf !important;
+    }
+</style>
 <body id="page-top" class="GAMC">
     <a class="skip-link" href="#jmenu">Jump to Menu</a>
     <a class="skip-link" href="#btnLang">Jump to Language</a>
@@ -48,19 +59,19 @@
             <div class="callbacks_container" style="box-shadow: 0 1px 5px #999999;">
                 <ul class="rslides" id="front-image-slider">
                     <li>
-                        <img src=@Model.Banner1Src alt="" width="960" height="220" />
+                        <img src=@Model.Banner1Src alt="" width="960" height="220" style="object-fit:cover" />
                     </li>
                     <li>
-                        <img src=@Model.Banner2Src alt="" width="960" height="220" />
+                        <img src=@Model.Banner2Src alt="" width="960" height="220" style="object-fit:cover" />
                     </li>
                     <li>
-                        <img src=@Model.Banner3Src alt="" width="960" height="220" />
+                        <img src=@Model.Banner3Src alt="" width="960" height="220" style="object-fit:cover" />
                     </li>
                     <li>
-                        <img src=@Model.Banner4Src alt="" width="960" height="220" />
+                        <img src=@Model.Banner4Src alt="" width="960" height="220" style="object-fit:cover" />
                     </li>
                     <li>
-                        <img src=@Model.Banner5Src alt="" width="960" height="220" />
+                        <img src=@Model.Banner5Src alt="" width="960" height="220" style="object-fit:cover" />
                     </li>
                 </ul>
             </div>
@@ -130,11 +141,11 @@
                             <div class="drop-one-columns">
                                 <div class="one-col">
                                     <ul class="mzr-links">
-                                        <li><a href="#">কিভাবে আবেদন করতে হবে</a></li>
-                                        <li><a href="#">আবেদন</a></li>
-                                        <li><a href="#">ভর্তি পরীক্ষা</a></li>
-                                        <li><a href="#">ভর্তি নীতি</a></li>
-                                        <li><a href="#">বর্তমান শিক্ষা ব্যবস্থা</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Admission" asp-action="HowToApply">কিভাবে আবেদন করতে হবে</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Admission" asp-action="Application">আবেদন</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Admission" asp-action="AdmissionTest">ভর্তি পরীক্ষা</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Admission" asp-action="AdmissionRules">ভর্তি নীতি</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Admission" asp-action="CurrentAdmissionStructure">বর্তমান শিক্ষা ব্যবস্থা</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -144,12 +155,12 @@
                             <div class="drop-one-columns">
                                 <div class="one-col">
                                     <ul class="mzr-links">
-                                        <li><a href="#">শ্রেণিসূচি</a></li>
-                                        <li><a href="#">অনলাইন শ্রেণিসূচি</a></li>
-                                        <li><a href="#">পরীক্ষার সময়সূচি</a></li>
-                                        <li><a href="#">একাডেমিক সিলেবাস </a></li>
-                                        <li><a href="#">শিক্ষা বর্ষপঞ্জি</a></li>
-                                        <li><a href="#">একাডেমিক প্রসপেক্টর</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Academic" asp-action="Schedule">শ্রেণিসূচি</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Academic" asp-action="OnlineSchedule">অনলাইন শ্রেণিসূচি</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Academic" asp-action="AdmissionSchedule">পরীক্ষার সময়সূচি</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Academic" asp-action="AcademicSyllabus">একাডেমিক সিলেবাস</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Academic" asp-action="EducationCalendar">শিক্ষা বর্ষপঞ্জি</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Academic" asp-action="Prospectus">একাডেমিক প্রসপেক্টর</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -174,7 +185,7 @@
                             <div class="drop-one-columns">
                                 <div class="one-col">
                                     <ul class="mzr-links">
-                                        <li><a href="#">অভ্যন্তরীণ পরীক্ষার ফলাফল</a></li>
+                                        <li><a href="http://result.jessoreboard.gov.bd/">যশোর বোর্ডের ফলাফল</a></li>
                                         <li><a href="http://www.educationboardresults.gov.bd/">বোর্ড পরীক্ষার ফলাফল</a></li>
                                         <li><a href="https://www.nu.ac.bd/results/">জাতীয় বিশ্ববিদ্যালয়ের ফলাফল</a></li>
                                     </ul>
@@ -186,13 +197,13 @@
                             <div class="drop-one-columns">
                                 <div class="one-col">
                                     <ul class="mzr-links">
-                                        <li><a href="#">গ্রন্থাগার</a></li>
-                                        <li><a href="#">কম্পিউটার ল্যাব</a></li>
-                                        <li><a href="#">খেলার মাঠ</a></li>
-                                        <li><a href="#">আইসিটি ক্লাব</a></li>
-                                        <li><a href="#">বিএনসিসি</a></li>
-                                        <li><a href="#">রেড ক্রিসেন্ট</a></li>
-                                        <li><a href="#">রোভার স্কাউট</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Resource" asp-action="Library">গ্রন্থাগার</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Resource" asp-action="ComputerLab">কম্পিউটার ল্যাব</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Resource" asp-action="PlayGround">খেলার মাঠ</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Resource" asp-action="IctClub">আইসিটি ক্লাব</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Resource" asp-action="Bncc">বিএনসিসি</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Resource" asp-action="RedCrescent">রেড ক্রিসেন্ট</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Resource" asp-action="RoverScoutt">রোভার স্কাউট</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -202,8 +213,8 @@
                             <div class="drop-one-columns">
                                 <div class="one-col">
                                     <ul class="mzr-links">
-                                        <li><a href="#">ছবি গ্যালারী</a></li>
-                                        <li><a href="#">ভিডিও গ্যালারী</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Gallery" asp-action="Image">ছবি গ্যালারী</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Gallery" asp-action="Vedio">ভিডিও গ্যালারী</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -213,8 +224,8 @@
                             <div class="drop-one-columns">
                                 <div class="one-col">
                                     <ul class="mzr-links">
-                                        <li><a href="#">সকল নোটিশ</a></li>
-                                        <li><a href="#">সকল অ্যাসাইনমেন্ট</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Notice" asp-action="AllNotice">সকল নোটিশ</a></li>
+                                        <li><a asp-area="DashBoard" asp-controller="Notice" asp-action="AllAssignment">সকল অ্যাসাইনমেন্ট</a></li>
                                     </ul>
                                 </div>
                             </div>
