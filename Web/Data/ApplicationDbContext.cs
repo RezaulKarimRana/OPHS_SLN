@@ -14,5 +14,6 @@ namespace Web.Data
         public DbSet<ApplicationRole> ApplicationRoles { get; set; }
         public DbSet<Banner> Banner { get; set; }
         public DbSet<HeadMaster> HeadMaster { get; set; }
+        public DbSet<Chairman> Chairman { get; set; }
     }
 }

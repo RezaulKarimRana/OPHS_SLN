@@ -45,9 +45,17 @@ namespace Web.Areas.Admin.Controllers
             };
             return View(data);
         }
-        public IActionResult Chairman()
+        public async Task<IActionResult> Chairman()
         {
-            return View();
+            var chairman = await _context.Chairman.FirstOrDefaultAsync();
+            var data = new ChairmanVM
+            {
+                Id = chairman.Id,
+                Name = chairman.Name,
+                Details = chairman.Details,
+                Image = chairman.Image
+            };
+            return View(data);
         }
         [HttpPost]
         public async Task<IActionResult> UploadBanner(IFormFile banner, int id)
@@ -97,6 +105,35 @@ namespace Web.Areas.Admin.Controllers
                 data.Details = details;
                 data.Image = base64Image;
                 _context.HeadMaster.Update(data);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message);
+            }
+            return Json(null);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SaveChairman(IFormFile imgFiles, string name, string details)
+        {
+            if(imgFiles == null)
+            {
+                return Ok();
+            }
+            try
+            {
+                string base64Image = "data:image/jpeg;base64,";
+                using (var ms = new MemoryStream())
+                {
+                    imgFiles.CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    base64Image += Convert.ToBase64String(fileBytes);
+                }
+                var data = await _context.Chairman.FirstOrDefaultAsync();
+                data.Name = name;
+                data.Details = details;
+                data.Image = base64Image;
+                _context.Chairman.Update(data);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
