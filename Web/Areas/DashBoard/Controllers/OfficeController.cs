@@ -32,14 +32,24 @@ namespace Web.Areas.DashBoard.Controllers
 
         public async Task<DashBoardVM> GetDashBoardData()
         {
+            var institute = await _context.Institute.FirstOrDefaultAsync();
             var banner = await _context.Banner.ToListAsync();
-            var dashBoardModel = new DashBoardVM();
-            dashBoardModel.Banner1Src = banner[0].Path;
-            dashBoardModel.Banner2Src = banner[1].Path;
-            dashBoardModel.Banner3Src = banner[3].Path;
-            dashBoardModel.Banner4Src = banner[3].Path;
-            dashBoardModel.Banner5Src = banner[4].Path;
-            dashBoardModel.Banner6Src = banner[5].Path;
+            var headMaster = await _context.HeadMaster.FirstOrDefaultAsync();
+            var chairman = await _context.Chairman.FirstOrDefaultAsync();
+            var dashBoardModel = new DashBoardVM
+            {
+                InstituteName = institute.Name,
+                Banner1Src = banner[0].Path,
+                Banner2Src = banner[1].Path,
+                Banner3Src = banner[3].Path,
+                Banner4Src = banner[3].Path,
+                Banner5Src = banner[4].Path,
+                Banner6Src = banner[5].Path,
+                HeadMasterName = headMaster.Name,
+                HeadMasterImage = headMaster.Image,
+                ChairmanName = chairman.Name,
+                ChairmanImage = chairman.Image
+            };
             return dashBoardModel;
         }
     }

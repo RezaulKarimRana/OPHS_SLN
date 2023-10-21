@@ -15,5 +15,7 @@ namespace Web.Data
         public DbSet<Banner> Banner { get; set; }
         public DbSet<HeadMaster> HeadMaster { get; set; }
         public DbSet<Chairman> Chairman { get; set; }
+        public DbSet<Institute> Institute { get; set; }
+        public DbSet<Notice> Notice { get; set; }
     }
 }

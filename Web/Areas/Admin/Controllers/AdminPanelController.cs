@@ -87,23 +87,22 @@ namespace Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveHeadMaster(IFormFile imgFiles, string name, string details)
         {
-            if(imgFiles == null)
-            {
-                return Ok();
-            }
             try
             {
                 string base64Image = "data:image/jpeg;base64,";
-                using (var ms = new MemoryStream())
+                if (imgFiles != null)
                 {
-                    imgFiles.CopyTo(ms);
-                    var fileBytes = ms.ToArray();
-                    base64Image += Convert.ToBase64String(fileBytes);
+                    using (var ms = new MemoryStream())
+                    {
+                        imgFiles.CopyTo(ms);
+                        var fileBytes = ms.ToArray();
+                        base64Image += Convert.ToBase64String(fileBytes);
+                    }
                 }
                 var data = await _context.HeadMaster.FirstOrDefaultAsync();
                 data.Name = name;
                 data.Details = details;
-                data.Image = base64Image;
+                data.Image = imgFiles == null ? data.Image : base64Image;
                 _context.HeadMaster.Update(data);
                 await _context.SaveChangesAsync();
             }
@@ -116,10 +115,6 @@ namespace Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveChairman(IFormFile imgFiles, string name, string details)
         {
-            if(imgFiles == null)
-            {
-                return Ok();
-            }
             try
             {
                 string base64Image = "data:image/jpeg;base64,";

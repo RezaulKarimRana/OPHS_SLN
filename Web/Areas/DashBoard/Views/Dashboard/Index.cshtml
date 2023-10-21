@@ -10,7 +10,7 @@
             <div class="scroll">
                 <h3>
                     <marquee direction="left" scrollamount="4" onmouseover="this.stop()" onmouseout="this.start()">
-                        <a href="#">ওসমানপুর প্রাগপুর মাধ্যমিক বিদ্যালয়, আলমডাঙ্গা চুয়াডাঙ্গা।</a>
+                        <a href="#">@Model.InstituteName , আলমডাঙ্গা চুয়াডাঙ্গা।।</a>
                     </marquee>
                 </h3>
             </div>
@@ -185,17 +185,17 @@
 
             <h5 class="bk-org title" style="text-align: center;">সভাপতি</h5>
             <p style="text-align:center">
-                <img alt="Principal" src="~/img/profile/avatar.jpg" style="border-style:solid; border-width:0px; height:176px; margin-left:40px; margin-right:40px; width:150px" />
+                <img alt="Principal" src="@Model.ChairmanImage" style="border-style:solid; border-width:0px; height:176px; margin-left:40px; margin-right:40px; width:150px" />
             </p>
             <p style="text-align:center">
                 <strong>
                     <a href="speech.php">
-                        <span style="color:#000000">মোঃ তানসেন আলী </span>
+                        <span style="color:#000000">@Model.ChairmanName</span>
                     </a>
                 </strong>
             </p>
             <p style="text-align:center">
-                <strong style="text-align:center">সভাপতি, গভর্নিং বডি, ওসমানপুর প্রাগপুর মাধ্যমিক বিদ্যালয়</strong>
+                <strong style="text-align:center">সভাপতি, গভর্নিং বডি, @Model.InstituteName</strong>
             </p>
             <p style="text-align:center;text-decoration:underline;color: Orange;font-size:16px;list-style:none"><a href="#"><strong style="color:Tomato">Details</strong></a></p>
             <p>
@@ -204,17 +204,17 @@
         <div class="column block">
             <h5 class="bk-org title" style="text-align: center;">প্রধান শিক্ষক</h5>
             <p style="text-align:center">
-                <img alt="Principal" src="~/img/profile/avatar.jpg" style="border-style:solid; border-width:0px; height:176px; margin-left:40px; margin-right:40px; width:150px" />
+                <img alt="Principal" src="@Model.HeadMasterImage" style="border-style:solid; border-width:0px; height:176px; margin-left:40px; margin-right:40px; width:150px" />
             </p>
             <p style="text-align:center">
                 <strong>
                     <a href="speech.php">
-                        <span style="color:#000000">মোঃ আব্দুল হাই</span>
+                        <span style="color:#000000">@Model.HeadMasterName</span>
                     </a>
                 </strong>
             </p>
             <p style="text-align:center">
-                <strong>প্রধান শিক্ষক, ওসমানপুর প্রাগপুর মাধ্যমিক বিদ্যালয়</strong>
+                <strong>প্রধান শিক্ষক, @Model.InstituteName</strong>
             </p>
             <p style="text-align:center;text-decoration:underline;color: Orange;font-size:16px;list-style:none"><a href="#"><strong style="color:Tomato">Details</strong></a></p>
             <p>
