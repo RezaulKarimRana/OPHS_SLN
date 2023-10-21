@@ -75,13 +75,13 @@
             var totalFiles = document.getElementById("img").files.length;
             for (var i = 0; i < totalFiles; i++) {
                 var file = document.getElementById("img").files[i];
-                formData.append("imgFiles", file);
+                formData.append("ImgFiles", file);
             }
-            var name = $('#name').val();
-            var details = $('#details').val();
+            formData.append("Name", $('#name').val());
+            formData.append("Details", $('#details').val());
             $.ajax({
                 type: "POST",
-                url: '/Admin/AdminPanel/SaveHeadMaster?name=' + name + '&details=' + details,
+                url: '/Admin/AdminPanel/SaveHeadMaster',
                 data: formData,
                 dataType: 'json',
                 contentType: false,

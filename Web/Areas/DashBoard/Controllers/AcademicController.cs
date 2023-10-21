@@ -61,8 +61,10 @@ namespace Web.Areas.DashBoard.Controllers
                 Banner5Src = banner[4].Path,
                 Banner6Src = banner[5].Path,
                 HeadMasterName = headMaster.Name,
+                HeadMasterDetails = headMaster.Details,
                 HeadMasterImage = headMaster.Image,
                 ChairmanName = chairman.Name,
+                ChairmanDetails = chairman.Details,
                 ChairmanImage = chairman.Image
             };
             return dashBoardModel;

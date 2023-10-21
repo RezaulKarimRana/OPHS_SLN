@@ -45,6 +45,18 @@ namespace Web.Areas.Admin.Controllers
             };
             return View(data);
         }
+        public async Task<IActionResult> HeadMasterDetailsAsync()
+        {
+            var headMaster = await _context.HeadMaster.FirstOrDefaultAsync();
+            var data = new HeadMasterVM
+            {
+                Id = headMaster.Id,
+                Name = headMaster.Name,
+                Details = headMaster.Details,
+                Image = headMaster.Image
+            };
+            return View(data);
+        }
         public async Task<IActionResult> Chairman()
         {
             var chairman = await _context.Chairman.FirstOrDefaultAsync();
@@ -85,24 +97,24 @@ namespace Web.Areas.Admin.Controllers
             return Json(null);
         }
         [HttpPost]
-        public async Task<IActionResult> SaveHeadMaster(IFormFile imgFiles, string name, string details)
+        public async Task<IActionResult> SaveHeadMaster(HeadMasterVM model)
         {
             try
             {
                 string base64Image = "data:image/jpeg;base64,";
-                if (imgFiles != null)
+                if (model.ImgFiles != null)
                 {
                     using (var ms = new MemoryStream())
                     {
-                        imgFiles.CopyTo(ms);
+                        model.ImgFiles.CopyTo(ms);
                         var fileBytes = ms.ToArray();
                         base64Image += Convert.ToBase64String(fileBytes);
                     }
                 }
                 var data = await _context.HeadMaster.FirstOrDefaultAsync();
-                data.Name = name;
-                data.Details = details;
-                data.Image = imgFiles == null ? data.Image : base64Image;
+                data.Name = model.Name;
+                data.Details = model.Details;
+                data.Image = model.ImgFiles == null ? data.Image : base64Image;
                 _context.HeadMaster.Update(data);
                 await _context.SaveChangesAsync();
             }
@@ -113,21 +125,24 @@ namespace Web.Areas.Admin.Controllers
             return Json(null);
         }
         [HttpPost]
-        public async Task<IActionResult> SaveChairman(IFormFile imgFiles, string name, string details)
+        public async Task<IActionResult> SaveChairman(ChairmanVM model)
         {
             try
             {
                 string base64Image = "data:image/jpeg;base64,";
-                using (var ms = new MemoryStream())
+                if (model.ImgFiles != null)
                 {
-                    imgFiles.CopyTo(ms);
-                    var fileBytes = ms.ToArray();
-                    base64Image += Convert.ToBase64String(fileBytes);
+                    using (var ms = new MemoryStream())
+                    {
+                        model.ImgFiles.CopyTo(ms);
+                        var fileBytes = ms.ToArray();
+                        base64Image += Convert.ToBase64String(fileBytes);
+                    }
                 }
                 var data = await _context.Chairman.FirstOrDefaultAsync();
-                data.Name = name;
-                data.Details = details;
-                data.Image = base64Image;
+                data.Name = model.Name;
+                data.Details = model.Details;
+                data.Image = model.ImgFiles == null ? data.Image : base64Image;
                 _context.Chairman.Update(data);
                 await _context.SaveChangesAsync();
             }
