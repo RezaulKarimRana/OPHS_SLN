@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using Web.Data;
 using Web.Models;
+using Web.Models.ViewModel;
 
 namespace Web.Areas.DashBoard.Controllers
 {

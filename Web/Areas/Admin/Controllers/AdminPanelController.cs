@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Data;
-using Web.Models;
+using Web.Models.ViewModel;
 
 namespace Web.Areas.Admin.Controllers
 {
@@ -22,18 +22,28 @@ namespace Web.Areas.Admin.Controllers
         public async Task<IActionResult> Banner()
         {
             var banner = await _context.Banner.ToListAsync();
-            var dashBoardModel = new BannerVM();
-            dashBoardModel.Banner1Src = banner[0].Path;
-            dashBoardModel.Banner2Src = banner[1].Path;
-            dashBoardModel.Banner3Src = banner[3].Path;
-            dashBoardModel.Banner4Src = banner[3].Path;
-            dashBoardModel.Banner5Src = banner[4].Path;
-            dashBoardModel.Banner6Src = banner[5].Path;
-            return View(dashBoardModel);
+            var bannerVM = new BannerVM
+            {
+                Banner1Src = banner[0].Path,
+                Banner2Src = banner[1].Path,
+                Banner3Src = banner[3].Path,
+                Banner4Src = banner[3].Path,
+                Banner5Src = banner[4].Path,
+                Banner6Src = banner[5].Path
+            };
+            return View(bannerVM);
         }
-        public IActionResult HeadMaster()
+        public async Task<IActionResult> HeadMasterAsync()
         {
-            return View();
+            var headMaster = await _context.HeadMaster.FirstOrDefaultAsync();
+            var data = new HeadMasterVM
+            {
+                Id = headMaster.Id,
+                Name = headMaster.Name,
+                Details = headMaster.Details,
+                Image = headMaster.Image
+            };
+            return View(data);
         }
         public IActionResult Chairman()
         {
@@ -58,6 +68,35 @@ namespace Web.Areas.Admin.Controllers
                 var data = await _context.Banner.Where(x => x.Id == id).FirstOrDefaultAsync();
                 data.Path = base64Image;
                 _context.Banner.Update(data);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message);
+            }
+            return Json(null);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SaveHeadMaster(IFormFile imgFiles, string name, string details)
+        {
+            if(imgFiles == null)
+            {
+                return Ok();
+            }
+            try
+            {
+                string base64Image = "data:image/jpeg;base64,";
+                using (var ms = new MemoryStream())
+                {
+                    imgFiles.CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    base64Image += Convert.ToBase64String(fileBytes);
+                }
+                var data = await _context.HeadMaster.FirstOrDefaultAsync();
+                data.Name = name;
+                data.Details = details;
+                data.Image = base64Image;
+                _context.HeadMaster.Update(data);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)

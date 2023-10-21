@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Data;
-using Web.Models;
+using Web.Models.ViewModel;
 
 namespace Web.Areas.DashBoard.Controllers
 {

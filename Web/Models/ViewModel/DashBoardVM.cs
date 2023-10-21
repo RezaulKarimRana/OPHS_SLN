@@ -1,6 +1,6 @@
-﻿namespace Web.Models
+﻿namespace Web.Models.ViewModel
 {
-    public class BannerVM
+    public class DashBoardVM
     {
         public string Banner1Src { get; set; }
         public string Banner2Src { get; set; }
