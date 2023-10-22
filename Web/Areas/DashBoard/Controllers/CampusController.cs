@@ -16,33 +16,38 @@ namespace Web.Areas.DashBoard.Controllers
 
         public async Task<IActionResult> AboutOurs()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetData();
+            return View(data);
         }
         public async Task<IActionResult> History()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetData();
+            return View(data);
         }
         public async Task<IActionResult> Aims()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetData();
+            return View(data);
         }
         public async Task<IActionResult> InstitutionalStructure()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetData();
+            return View(data);
         }
 
-        public async Task<DashBoardVM> GetDashBoardData()
+        public async Task<DashBoardVM> GetData()
         {
+            var aboutOurs = await _context.AboutOurs.FirstOrDefaultAsync();
             var institute = await _context.Institute.FirstOrDefaultAsync();
             var banner = await _context.Banner.ToListAsync();
             var headMaster = await _context.HeadMaster.FirstOrDefaultAsync();
             var chairman = await _context.Chairman.FirstOrDefaultAsync();
             var dashBoardModel = new DashBoardVM
             {
+                AboutOurself = aboutOurs.AboutOurself,
+                History = aboutOurs.History,
+                Aims = aboutOurs.Aims,
+                InstitutionalStructure = aboutOurs.InstitutionalStructure,
                 InstituteName = institute.Name,
                 Banner1Src = banner[0].Path,
                 Banner2Src = banner[1].Path,

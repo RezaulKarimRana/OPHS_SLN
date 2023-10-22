@@ -2,6 +2,10 @@
 {
     public class DashBoardVM
     {
+        public string AboutOurself { get; set; }
+        public string History { get; set; }
+        public string Aims { get; set; }
+        public string InstitutionalStructure { get; set; }
         public string InstituteName { get; set; }
         public string Banner1Src { get; set; }
         public string Banner2Src { get; set; }

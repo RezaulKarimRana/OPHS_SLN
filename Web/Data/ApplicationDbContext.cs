@@ -17,5 +17,6 @@ namespace Web.Data
         public DbSet<Chairman> Chairman { get; set; }
         public DbSet<Institute> Institute { get; set; }
         public DbSet<Notice> Notice { get; set; }
+        public DbSet<AboutOurs> AboutOurs { get; set; }
     }
 }
