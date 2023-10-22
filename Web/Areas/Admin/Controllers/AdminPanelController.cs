@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Data;
+using Web.Models;
 using Web.Models.ViewModel;
 
 namespace Web.Areas.Admin.Controllers
@@ -33,19 +34,7 @@ namespace Web.Areas.Admin.Controllers
             };
             return View(bannerVM);
         }
-        public async Task<IActionResult> HeadMasterAsync()
-        {
-            var headMaster = await _context.HeadMaster.FirstOrDefaultAsync();
-            var data = new HeadMasterVM
-            {
-                Id = headMaster.Id,
-                Name = headMaster.Name,
-                Details = headMaster.Details,
-                Image = headMaster.Image
-            };
-            return View(data);
-        }
-        public async Task<IActionResult> HeadMasterDetailsAsync()
+        public async Task<IActionResult> HeadMaster()
         {
             var headMaster = await _context.HeadMaster.FirstOrDefaultAsync();
             var data = new HeadMasterVM
@@ -68,6 +57,21 @@ namespace Web.Areas.Admin.Controllers
                 Image = chairman.Image
             };
             return View(data);
+        }
+        public async Task<IActionResult> Notice()
+        {
+            var allNotice = await _context.Notice.ToListAsync();
+            var response = new List<NoticeVM>();
+            foreach(var item in allNotice)
+            {
+                response.Add(new NoticeVM
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Image = item.Image
+                });
+            }
+            return View(response);
         }
         [HttpPost]
         public async Task<IActionResult> UploadBanner(IFormFile banner, int id)
@@ -144,6 +148,36 @@ namespace Web.Areas.Admin.Controllers
                 data.Details = model.Details;
                 data.Image = model.ImgFiles == null ? data.Image : base64Image;
                 _context.Chairman.Update(data);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message);
+            }
+            return Json(null);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SaveNotice(NoticeVM model)
+        {
+            if(model.ImgFiles == null)
+            {
+                return Ok("Please add a Notice");
+            }
+            try
+            {
+                string base64Image = "data:image/jpeg;base64,";
+                using (var ms = new MemoryStream())
+                {
+                    model.ImgFiles.CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    base64Image += Convert.ToBase64String(fileBytes);
+                }
+                var notice = new Notice
+                {
+                    Name = model.Name,
+                    Image = base64Image
+                };
+                _context.Notice.Add(notice);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
