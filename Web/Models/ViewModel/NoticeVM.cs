@@ -2,7 +2,8 @@
 {
     public class NoticeVM
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
+        public string Serial { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
         public string CreatedDate { get; set; }

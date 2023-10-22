@@ -20,5 +20,6 @@
         public string ChairmanDetails { get; set; }
         public string ChairmanImage { get; set; }
         public List<NoticeVM> Notices { get; set; }
+        public NoticeVM Notice { get; set; }
     }
 }

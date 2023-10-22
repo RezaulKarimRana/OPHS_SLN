@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Drawing;
 using Web.Data;
 using Web.Models.ViewModel;
 
@@ -23,7 +24,8 @@ namespace Web.Areas.DashBoard.Controllers
             {
                 response.Add(new NoticeVM
                 {
-                    Id = ConvertEnToBn(item.Id.ToString()),
+                    Id = item.Id,
+                    Serial = ConvertEnToBn(item.Id.ToString()),
                     Name = item.Name,
                     CreatedDate = ConvertEnToBn(DateTime.Now.ToShortDateString()),
                     Image = item.Image
@@ -71,6 +73,18 @@ namespace Web.Areas.DashBoard.Controllers
                     .Replace("7", "\u09ED")
                     .Replace("8", "\u09EE")
                     .Replace("9", "\u09EF");
+        }
+        public async Task<IActionResult> NoticeView(int id)
+        {
+            var notice = await _context.Notice.Where(x => x.Id == id).FirstOrDefaultAsync();
+            var data = await GetDashBoardData();
+            data.Notice = new NoticeVM
+            {
+                Id = notice.Id,
+                Name = notice.Name,
+                Image = notice.Image
+            };
+            return View(data);
         }
     }
 }
