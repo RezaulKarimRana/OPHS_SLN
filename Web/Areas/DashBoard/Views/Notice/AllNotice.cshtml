@@ -2,10 +2,30 @@
 
 <div id="contents" class="sixteen columns">
     <h3 style="text-align: center;"> সকল নোটিশ </h3>
-    <hr/>
+    <hr />
     <div class="twelve columns">
         <div style="text-align: justify;">
-            <p>তথ্য উন্নয়নের কাজ চলছে....</p> <br>
+            <table class="table" id="Tables_id">
+                <thead>
+                    <tr>
+                        <td style="text-align: center;">ক্রমিক</td>
+                        <td style="text-align: center;">শিরোনাম</td>
+                        <td style="text-align: center;">প্রকাশের তারিখ</td>
+                        <td style="text-align: center;">ডাউনলোড</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Notices)
+                        {
+                            <tr>
+                                <td style="text-align: center;">@item.Id</td>
+                                <td>@item.Name</td>
+                                <td>@item.CreatedDate</td>
+                                <td><img src="/img/icon/pdf.png" width="40" height="40" /></td>
+                            </tr>
+                        }
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

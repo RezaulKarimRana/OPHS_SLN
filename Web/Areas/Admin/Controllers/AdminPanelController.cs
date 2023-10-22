@@ -66,7 +66,7 @@ namespace Web.Areas.Admin.Controllers
             {
                 response.Add(new NoticeVM
                 {
-                    Id = item.Id,
+                    Id = item.Id.ToString(),
                     Name = item.Name,
                     Image = item.Image
                 });

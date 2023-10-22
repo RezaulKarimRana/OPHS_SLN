@@ -16,8 +16,21 @@ namespace Web.Areas.DashBoard.Controllers
 
         public async Task<IActionResult> AllNotice()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetDashBoardData();
+            var allNotice = await _context.Notice.ToListAsync();
+            var response = new List<NoticeVM>();
+            foreach (var item in allNotice)
+            {
+                response.Add(new NoticeVM
+                {
+                    Id = ConvertEnToBn(item.Id.ToString()),
+                    Name = item.Name,
+                    CreatedDate = ConvertEnToBn(DateTime.Now.ToShortDateString()),
+                    Image = item.Image
+                });
+            }
+            data.Notices = response;
+            return View(data);
         }
         public async Task<IActionResult> AllAssignment()
         {
@@ -45,6 +58,19 @@ namespace Web.Areas.DashBoard.Controllers
                 ChairmanImage = chairman.Image
             };
             return dashBoardModel;
+        }
+        public string ConvertEnToBn(string data)
+        {
+            return data.Replace("0", "\u09E6")
+                    .Replace("1", "\u09E7")
+                    .Replace("2", "\u09E8")
+                    .Replace("3", "\u09E9")
+                    .Replace("4", "\u09EA")
+                    .Replace("5", "\u09EB")
+                    .Replace("6", "\u09EC")
+                    .Replace("7", "\u09ED")
+                    .Replace("8", "\u09EE")
+                    .Replace("9", "\u09EF");
         }
     }
 }
