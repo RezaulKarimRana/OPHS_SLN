@@ -9,12 +9,10 @@ namespace Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class AdminPanelController : Controller
     {
-        private IWebHostEnvironment _environment;
         private ApplicationDbContext _context;
-        public AdminPanelController(ApplicationDbContext context, IWebHostEnvironment environment)
+        public AdminPanelController(ApplicationDbContext context)
         {
             _context = context;
-            _environment = environment;
         }
         public IActionResult Index()
         {
@@ -68,7 +66,7 @@ namespace Web.Areas.Admin.Controllers
                 {
                     Id = item.Id,
                     Name = item.Name,
-                    Image = item.Image
+                    FileName = item.FileName
                 });
             }
             return View(response);
@@ -165,17 +163,24 @@ namespace Web.Areas.Admin.Controllers
             }
             try
             {
-                string base64Image = "data:image/jpeg;base64,";
-                using (var ms = new MemoryStream())
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+                var fileName = Guid.NewGuid().ToString() + "_" + model.ImgFiles.FileName;
+                if (model.ImgFiles != null)
                 {
-                    model.ImgFiles.CopyTo(ms);
-                    var fileBytes = ms.ToArray();
-                    base64Image += Convert.ToBase64String(fileBytes);
+                    Directory.CreateDirectory(pathToSave);
+                    string filePath = Path.Combine(pathToSave, fileName);
+                    using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.ImgFiles.CopyToAsync(fileStream);
+                    }
                 }
                 var notice = new Notice
                 {
                     Name = model.Name,
-                    Image = base64Image
+                    FileName = model.ImgFiles.FileName,
+                    FileType = model.ImgFiles.ContentType,
+                    FilePath = fileName,
+                    CreatedDate = DateTime.Now.ToShortDateString()
                 };
                 _context.Notice.Add(notice);
                 await _context.SaveChangesAsync();

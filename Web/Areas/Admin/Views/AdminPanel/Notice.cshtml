@@ -54,9 +54,10 @@
                         @foreach (var item in Model)
                         {
                             <tr>
-                                <td>@item.Id</td>
+                                <td style="text-align: center;">@item.Id</td>
                                 <td>@item.Name</td>
-                                <td><img src=@item.Image width="350" height="200" /></td>
+                                <td>@item.CreatedDate</td>
+                                <td><a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeView" asp-route-id="@item.Id" target="_blank"><img src="/img/icon/pdf.png" width="40" height="40" /></a></td>
                             </tr>
                         }
                     </tbody>
