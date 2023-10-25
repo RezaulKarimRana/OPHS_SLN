@@ -1,0 +1,50 @@
+﻿@model AboutOursVM;
+<style type="text/css">
+    .profile {
+        float: right;
+        padding: 10px;
+        margin-top: 10px;
+    }
+    textarea {
+     width: 100%;
+     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+     box-sizing: border-box;         /* Opera/IE 8+ */
+}
+</style>
+<div class="container" style="margin-top:20px">
+    <div class="row">
+        <div class="card">
+            <div class="card-header">
+                <b>ইতিহাস সম্পর্কে লিখুন</b>
+            </div>
+            <div class="card-body">
+                <div class="col-12">
+                    <textarea id="history" rows="13">@Model.History</textarea>
+                </div>
+                <div class="col-12">
+                    <button id="save" class="btn btn-success btn-sm profile">হালনাগাদ করুন</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $("#save").click(function() {
+            var formData = new FormData();
+            formData.append("History", $('#history').val());
+            $.ajax({
+                type: "POST",
+                url: '/Admin/Campus/SaveHistory',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    alertify.success("হালনাগাদ সম্পন্ন হয়েছে");
+                }
+            });
+        });
+    </script>
+}
