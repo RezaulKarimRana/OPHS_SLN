@@ -20,10 +20,16 @@
                     <div id="notice-board-ticker">
                         <ul style="margin:0">
                             <li style="margin:1px">
-                                <a href="#" style="margin:0"> “দশম শ্রেণিতে ভর্তি বিষয়ে বিজ্ঞপ্তি <i>(২১-০৯-২০২৩)</i></a>
+                                <a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeView" asp-route-id="@Model.Notices[0].Id" target="_blank" style="margin:0"> @Model.Notices[0].Name <i>(@Model.Notices[0].CreatedDate)</i></a>
                             </li>
                             <li style="margin:1px">
-                                <a href="#" style="margin:0"> “নবম শ্রেণিতে ভর্তি বিষয়ে বিজ্ঞপ্তি:<i>(২১-০৯-২০২৩)</i></a>
+                                <a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeView" asp-route-id="@Model.Notices[1].Id" target="_blank" style="margin:0"> @Model.Notices[1].Name <i>(@Model.Notices[1].CreatedDate)</i></a>
+                            </li>
+                            <li style="margin:1px">
+                                <a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeView" asp-route-id="@Model.Notices[2].Id" target="_blank" style="margin:0"> @Model.Notices[2].Name <i>(@Model.Notices[2].CreatedDate)</i></a>
+                            </li>
+                            <li style="margin:1px">
+                                <a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeView" asp-route-id="@Model.Notices[3].Id" target="_blank" style="margin:0"> @Model.Notices[3].Name <i>(@Model.Notices[3].CreatedDate)</i></a>
                             </li>
                         </ul>
                         <a class="btn right" asp-area="DashBoard" asp-controller="Notice" asp-action="AllNotice">সকল নোটিশ</a>

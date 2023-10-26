@@ -8,7 +8,6 @@
             <table class="table" id="Tables_id">
                 <thead>
                     <tr>
-                        <td width="8%" style="text-align: center;">ক্রমিক</td>
                         <td style="text-align: center;">শিরোনাম</td>
                         <td width="8%" style="text-align: center;">প্রকাশের তারিখ</td>
                         <td width="8%" style="text-align: center;cursor:pointer">ডাউনলোড</td>
@@ -18,7 +17,6 @@
                     @foreach (var item in Model.Notices)
                         {
                             <tr>
-                                <td style="text-align: center;">@item.Id</td>
                                 <td>@item.Name</td>
                                 <td>@item.CreatedDate</td>
                                 <td><a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeView" asp-route-id="@item.Id" target="_blank"><img src="/img/icon/pdf.png" width="40" height="40" /></a></td>

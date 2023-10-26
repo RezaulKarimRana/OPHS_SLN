@@ -18,7 +18,7 @@ namespace Web.Areas.DashBoard.Controllers
         public async Task<IActionResult> AllNotice()
         {
             var data = await GetDashBoardData();
-            var allNotice = await _context.Notice.ToListAsync();
+            var allNotice = await _context.Notice.OrderByDescending(x=> x.Id).ToListAsync();
             var response = new List<NoticeVM>();
             foreach (var item in allNotice)
             {

@@ -40,6 +40,19 @@ namespace Web.Areas.DashBoard.Controllers
             var banner = await _context.Banner.ToListAsync();
             var headMaster = await _context.HeadMaster.FirstOrDefaultAsync();
             var chairman = await _context.Chairman.FirstOrDefaultAsync();
+            var allNotice = await _context.Notice.OrderByDescending(x => x.Id).ToListAsync();
+            var noticeVM = new List<NoticeVM>();
+            foreach (var item in allNotice)
+            {
+                noticeVM.Add(new NoticeVM
+                {
+                    Id = item.Id,
+                    Serial = ConvertEnToBn(item.Id.ToString()),
+                    Name = item.Name,
+                    CreatedDate = ConvertEnToBn(item.CreatedDate),
+                    FileName = item.FileName
+                });
+            }
             var dashBoardModel = new DashBoardVM
             {
                 InstituteName = institute.Name,
@@ -52,9 +65,23 @@ namespace Web.Areas.DashBoard.Controllers
                 HeadMasterName = headMaster.Name,
                 HeadMasterImage = headMaster.Image,
                 ChairmanName = chairman.Name,
-                ChairmanImage = chairman.Image
+                ChairmanImage = chairman.Image,
+                Notices = noticeVM
             };
             return dashBoardModel;
+        }
+        public string ConvertEnToBn(string data)
+        {
+            return data.Replace("0", "\u09E6")
+                    .Replace("1", "\u09E7")
+                    .Replace("2", "\u09E8")
+                    .Replace("3", "\u09E9")
+                    .Replace("4", "\u09EA")
+                    .Replace("5", "\u09EB")
+                    .Replace("6", "\u09EC")
+                    .Replace("7", "\u09ED")
+                    .Replace("8", "\u09EE")
+                    .Replace("9", "\u09EF");
         }
     }
 }
