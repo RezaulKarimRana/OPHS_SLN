@@ -15,63 +15,72 @@ namespace Web.Areas.DashBoard.Controllers
         }
         public async Task<IActionResult> HeadMaster()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var headMaster = await _context.HeadMaster.FirstOrDefaultAsync();
+            var data = await GetCommonData();
+            data.HeadMasterName = headMaster == null ? string.Empty : headMaster.Name;
+            data.HeadMasterImage = headMaster == null ? string.Empty : headMaster.Image;
+            data.HeadMasterDetails = headMaster == null ? string.Empty : headMaster.Details;
+            return View(data);
         }
         public async Task<IActionResult> Chairman()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var chairman = await _context.Chairman.FirstOrDefaultAsync();
+            var data = await GetCommonData();
+            data.ChairmanName = chairman == null ? string.Empty : chairman.Name;
+            data.ChairmanImage = chairman == null ? string.Empty : chairman.Image;
+            data.ChairmanDetails = chairman == null ? string.Empty : chairman.Details;
+            return View(data);
         }
         public async Task<IActionResult> GoverningBody()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetCommonData();
+            return View(data);
         }
         public async Task<IActionResult> AcademicCouncil()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetCommonData();
+            return View(data);
         }
         public async Task<IActionResult> TeacherList()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetCommonData();
+            return View(data);
         }
         public async Task<IActionResult> OfficialsList()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetCommonData();
+            return View(data);
         }
         public async Task<IActionResult> EmployeeList()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetCommonData();
+            return View(data);
         }
 
-        public async Task<DashBoardVM> GetDashBoardData()
+        public async Task<DashBoardVM> GetCommonData()
         {
             var institute = await _context.Institute.FirstOrDefaultAsync();
             var banner = await _context.Banner.ToListAsync();
-            var headMaster = await _context.HeadMaster.FirstOrDefaultAsync();
-            var chairman = await _context.Chairman.FirstOrDefaultAsync();
-            var dashBoardModel = new DashBoardVM
+            var data = new DashBoardVM
             {
-                InstituteName = institute.Name,
-                Banner1Src = banner[0].Path,
-                Banner2Src = banner[1].Path,
-                Banner3Src = banner[3].Path,
-                Banner4Src = banner[3].Path,
-                Banner5Src = banner[4].Path,
-                Banner6Src = banner[5].Path,
-                HeadMasterName = headMaster.Name,
-                HeadMasterDetails = headMaster.Details,
-                HeadMasterImage = headMaster.Image,
-                ChairmanName = chairman.Name,
-                ChairmanDetails = chairman.Details,
-                ChairmanImage = chairman.Image
+                InstituteName = institute == null ? string.Empty : institute.Name
             };
-            return dashBoardModel;
+            if (banner != null)
+            {
+                if (banner.Count >= 1)
+                    data.Banner1Src = banner[0].Path;
+                if (banner.Count >= 2)
+                    data.Banner2Src = banner[1].Path;
+                if (banner.Count >= 3)
+                    data.Banner3Src = banner[2].Path;
+                if (banner.Count >= 4)
+                    data.Banner4Src = banner[3].Path;
+                if (banner.Count >= 5)
+                    data.Banner5Src = banner[4].Path;
+                if (banner.Count >= 6)
+                    data.Banner6Src = banner[5].Path;
+            }
+            return data;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Drawing;
 using Web.Data;
 using Web.Models.ViewModel;
 
@@ -17,7 +16,7 @@ namespace Web.Areas.DashBoard.Controllers
 
         public async Task<IActionResult> AllNotice()
         {
-            var data = await GetDashBoardData();
+            var data = await GetCommonData();
             var allNotice = await _context.Notice.OrderByDescending(x=> x.Id).ToListAsync();
             var response = new List<NoticeVM>();
             foreach (var item in allNotice)
@@ -36,29 +35,32 @@ namespace Web.Areas.DashBoard.Controllers
         }
         public async Task<IActionResult> AllAssignment()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetCommonData();
+            return View(data);
         }
-        public async Task<DashBoardVM> GetDashBoardData()
+        public async Task<DashBoardVM> GetCommonData()
         {
             var institute = await _context.Institute.FirstOrDefaultAsync();
             var banner = await _context.Banner.ToListAsync();
-            var headMaster = await _context.HeadMaster.FirstOrDefaultAsync();
-            var chairman = await _context.Chairman.FirstOrDefaultAsync();
             var dashBoardModel = new DashBoardVM
             {
-                InstituteName = institute.Name,
-                Banner1Src = banner[0].Path,
-                Banner2Src = banner[1].Path,
-                Banner3Src = banner[3].Path,
-                Banner4Src = banner[3].Path,
-                Banner5Src = banner[4].Path,
-                Banner6Src = banner[5].Path,
-                HeadMasterName = headMaster.Name,
-                HeadMasterImage = headMaster.Image,
-                ChairmanName = chairman.Name,
-                ChairmanImage = chairman.Image
+                InstituteName = institute == null ? string.Empty : institute.Name,
             };
+            if (banner != null)
+            {
+                if (banner.Count >= 1)
+                    dashBoardModel.Banner1Src = banner[0].Path;
+                if (banner.Count >= 2)
+                    dashBoardModel.Banner2Src = banner[1].Path;
+                if (banner.Count >= 3)
+                    dashBoardModel.Banner3Src = banner[2].Path;
+                if (banner.Count >= 4)
+                    dashBoardModel.Banner4Src = banner[3].Path;
+                if (banner.Count >= 5)
+                    dashBoardModel.Banner5Src = banner[4].Path;
+                if (banner.Count >= 6)
+                    dashBoardModel.Banner6Src = banner[5].Path;
+            }
             return dashBoardModel;
         }
         public string ConvertEnToBn(string data)

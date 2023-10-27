@@ -10,17 +10,15 @@ namespace Web.Areas.DashBoard.Controllers
     [Area("DashBoard")]
     public class DashboardController : Controller
     {
-        private readonly ILogger<DashboardController> _logger;
         private ApplicationDbContext _context;
-        public DashboardController(ApplicationDbContext context, ILogger<DashboardController> logger)
+        public DashboardController(ApplicationDbContext context)
         {
-            _logger = logger;
             _context = context;
         }
 
         public async Task<IActionResult> Index()
         {
-            var dashBoardModel = await GetDashBoardData();
+            var dashBoardModel = await GetCommonData();
             return View(dashBoardModel);
         }
 
@@ -34,7 +32,7 @@ namespace Web.Areas.DashBoard.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public async Task<DashBoardVM> GetDashBoardData()
+        public async Task<DashBoardVM> GetCommonData()
         {
             var institute = await _context.Institute.FirstOrDefaultAsync();
             var banner = await _context.Banner.ToListAsync();
@@ -42,32 +40,46 @@ namespace Web.Areas.DashBoard.Controllers
             var chairman = await _context.Chairman.FirstOrDefaultAsync();
             var allNotice = await _context.Notice.OrderByDescending(x => x.Id).ToListAsync();
             var noticeVM = new List<NoticeVM>();
-            foreach (var item in allNotice)
+            if(allNotice != null)
             {
-                noticeVM.Add(new NoticeVM
+                foreach (var item in allNotice)
                 {
-                    Id = item.Id,
-                    Serial = ConvertEnToBn(item.Id.ToString()),
-                    Name = item.Name,
-                    CreatedDate = ConvertEnToBn(item.CreatedDate),
-                    FileName = item.FileName
-                });
+                    noticeVM.Add(new NoticeVM
+                    {
+                        Id = item.Id,
+                        Serial = ConvertEnToBn(item.Id.ToString()),
+                        Name = item.Name,
+                        CreatedDate = ConvertEnToBn(item.CreatedDate),
+                        FileName = item.FileName
+                    });
+                }
             }
             var dashBoardModel = new DashBoardVM
             {
-                InstituteName = institute.Name,
-                Banner1Src = banner[0].Path,
-                Banner2Src = banner[1].Path,
-                Banner3Src = banner[3].Path,
-                Banner4Src = banner[3].Path,
-                Banner5Src = banner[4].Path,
-                Banner6Src = banner[5].Path,
-                HeadMasterName = headMaster.Name,
-                HeadMasterImage = headMaster.Image,
-                ChairmanName = chairman.Name,
-                ChairmanImage = chairman.Image,
+                InstituteName = institute == null ? string.Empty : institute.Name,
+                InstituteAddress = institute == null ? string.Empty : institute.Address,
+                InstitutePostalAddress = institute == null ? string.Empty : institute.PostalAddress,
+                HeadMasterName = headMaster == null ? string.Empty : headMaster.Name,
+                HeadMasterImage = headMaster == null ? string.Empty : headMaster.Image,
+                ChairmanName =  chairman == null ? string.Empty : chairman.Name,
+                ChairmanImage =  chairman == null ? string.Empty : chairman.Image,
                 Notices = noticeVM
             };
+            if(banner != null)
+            {
+                if (banner.Count >= 1)
+                    dashBoardModel.Banner1Src = banner[0].Path;
+                if (banner.Count >= 2)
+                    dashBoardModel.Banner2Src = banner[1].Path;
+                if (banner.Count >= 3)
+                    dashBoardModel.Banner3Src = banner[2].Path;
+                if (banner.Count >= 4)
+                    dashBoardModel.Banner4Src = banner[3].Path;
+                if (banner.Count >= 5)
+                    dashBoardModel.Banner5Src = banner[4].Path;
+                if (banner.Count >= 6)
+                    dashBoardModel.Banner6Src = banner[5].Path;
+            }
             return dashBoardModel;
         }
         public string ConvertEnToBn(string data)

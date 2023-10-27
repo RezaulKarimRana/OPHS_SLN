@@ -7,6 +7,8 @@
         public string Aims { get; set; }
         public string InstitutionalStructure { get; set; }
         public string InstituteName { get; set; }
+        public string InstituteAddress { get; set; }
+        public string InstitutePostalAddress { get; set; }
         public string Banner1Src { get; set; }
         public string Banner2Src { get; set; }
         public string Banner3Src { get; set; }
