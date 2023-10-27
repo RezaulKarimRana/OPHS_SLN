@@ -1,6 +1,6 @@
-﻿@model ChairmanVM;
+﻿@model List<NoticeVM>;
 <style type="text/css">
-    .profile{
+    .profile {
         float: right;
         padding: 10px;
         margin-top: 10px;
@@ -11,32 +11,21 @@
     <div class="row">
         <div class="card">
             <div class="card-header">
-                <b>সভাপতির তথ্য হালনাগাদ করুন</b>
+                <b>নোটিশ যোগ করুন</b>
             </div>
             <div class="card-body">
                 <div class="col-12">
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group row mb-4">
-                                <label class="col-sm-2 col-form-label-sm">নামঃ</label>
+                                <label class="col-sm-4 col-form-label-sm">বিষয়ঃ</label>
                                 <div class="col-sm-8">
-                                    <input type="text" id="name" value="@Model.Name" class="form-control" />
+                                    <input type="text" id="name" class="form-control" />
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
-                                <label class="col-sm-2 col-form-label-sm">বিস্তারিতঃ</label>
-                                <div class="col-sm-10">
-                                    <textarea id="details" rows="8" cols="50">@Model.Details</textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group row mb-4">
-                                <label class="col-sm-2 col-form-label-sm">ছবিঃ</label>
-                                <div class="col-sm-10">
-                                    <img alt="HeadMaster" src="@Model.Image" style="border-style:solid; border-width:0px; height:176px; margin-left:40px; margin-right:40px; width:150px" />
-                                </div>
-                                <div class="col-sm-10">
+                                <label class="col-sm-4 col-form-label-sm">নোটিশের ছবিঃ</label>
+                                <div class="col-sm-8">
                                     <input type="file" id="img">
                                 </div>
                             </div>
@@ -46,6 +35,33 @@
                 <div class="col-12">
                     <button id="save" class="btn btn-success btn-sm profile">হালনাগাদ করুন</button>
                 </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <b>সকল নোটিশ</b>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped">
+                    <thead style="text-align:center">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">নাম</th>
+                            <th scope="col">নোটিশ</th>
+                        </tr>
+                    </thead>
+                    <tbody style="text-align:center">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td style="text-align: center;">@item.Id</td>
+                                <td>@item.Name</td>
+                                <td>@item.CreatedDate</td>
+                                <td><a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeView" asp-route-id="@item.Id" target="_blank"><img src="/img/icon/pdf.png" width="40" height="40" /></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -78,16 +94,16 @@
                 formData.append("ImgFiles", file);
             }
             formData.append("Name", $('#name').val());
-            formData.append("Details", $('#details').val());
             $.ajax({
                 type: "POST",
-                url: '/Admin/AdminPanel/SaveChairman',
+                url: '/Admin/AdminPanel/SaveNotice',
                 data: formData,
                 dataType: 'json',
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                    alertify.success("Successfully Updated");
+                    alertify.success("Successfully Added");
+                    location.reload();
                 }
             });
         });

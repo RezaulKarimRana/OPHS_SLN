@@ -42,26 +42,26 @@ namespace Web.Areas.DashBoard.Controllers
         {
             var institute = await _context.Institute.FirstOrDefaultAsync();
             var banner = await _context.Banner.ToListAsync();
-            var dashBoardModel = new DashBoardVM
+            var data = new DashBoardVM
             {
                 InstituteName = institute == null ? string.Empty : institute.Name,
             };
             if (banner != null)
             {
                 if (banner.Count >= 1)
-                    dashBoardModel.Banner1Src = banner[0].Path;
+                    data.Banner1Src = banner[0].Path;
                 if (banner.Count >= 2)
-                    dashBoardModel.Banner2Src = banner[1].Path;
+                    data.Banner2Src = banner[1].Path;
                 if (banner.Count >= 3)
-                    dashBoardModel.Banner3Src = banner[2].Path;
+                    data.Banner3Src = banner[2].Path;
                 if (banner.Count >= 4)
-                    dashBoardModel.Banner4Src = banner[3].Path;
+                    data.Banner4Src = banner[3].Path;
                 if (banner.Count >= 5)
-                    dashBoardModel.Banner5Src = banner[4].Path;
+                    data.Banner5Src = banner[4].Path;
                 if (banner.Count >= 6)
-                    dashBoardModel.Banner6Src = banner[5].Path;
+                    data.Banner6Src = banner[5].Path;
             }
-            return dashBoardModel;
+            return data;
         }
         public string ConvertEnToBn(string data)
         {

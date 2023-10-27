@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Views\Administration\" />
     <Folder Include="Uploads\" />
     <Folder Include="wwwroot\img\banner\" />
     <Folder Include="wwwroot\img\gallery\" />

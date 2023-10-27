@@ -1,4 +1,4 @@
-﻿@model HeadMasterVM;
+﻿@model HeadMaster;
 <style type="text/css">
     .profile{
         float: right;
@@ -81,7 +81,7 @@
             formData.append("Details", $('#details').val());
             $.ajax({
                 type: "POST",
-                url: '/Admin/AdminPanel/SaveHeadMaster',
+                url: '/Admin/Administration/SaveHeadMaster',
                 data: formData,
                 dataType: 'json',
                 contentType: false,

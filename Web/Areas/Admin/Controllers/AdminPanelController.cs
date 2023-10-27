@@ -20,40 +20,23 @@ namespace Web.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Banner()
         {
+            var data = new BannerVM();
             var banner = await _context.Banner.ToListAsync();
-            var bannerVM = new BannerVM
+            if(banner != null)
             {
-                Banner1Src = banner[0].Path,
-                Banner2Src = banner[1].Path,
-                Banner3Src = banner[3].Path,
-                Banner4Src = banner[3].Path,
-                Banner5Src = banner[4].Path,
-                Banner6Src = banner[5].Path
-            };
-            return View(bannerVM);
-        }
-        public async Task<IActionResult> HeadMaster()
-        {
-            var headMaster = await _context.HeadMaster.FirstOrDefaultAsync();
-            var data = new HeadMasterVM
-            {
-                Id = headMaster.Id,
-                Name = headMaster.Name,
-                Details = headMaster.Details,
-                Image = headMaster.Image
-            };
-            return View(data);
-        }
-        public async Task<IActionResult> Chairman()
-        {
-            var chairman = await _context.Chairman.FirstOrDefaultAsync();
-            var data = new ChairmanVM
-            {
-                Id = chairman.Id,
-                Name = chairman.Name,
-                Details = chairman.Details,
-                Image = chairman.Image
-            };
+                if (banner.Count() >= 1)
+                    data.Banner1Src = banner[0].Path;
+                if (banner.Count() >= 2)
+                    data.Banner2Src = banner[1].Path;
+                if (banner.Count() >= 3)
+                    data.Banner3Src = banner[2].Path;
+                if (banner.Count() >= 4)
+                    data.Banner4Src = banner[3].Path;
+                if (banner.Count() >= 5)
+                    data.Banner5Src = banner[4].Path;
+                if (banner.Count() >= 6)
+                    data.Banner6Src = banner[5].Path;
+            }
             return View(data);
         }
         public async Task<IActionResult> Notice()
@@ -90,62 +73,6 @@ namespace Web.Areas.Admin.Controllers
                 var data = await _context.Banner.Where(x => x.Id == id).FirstOrDefaultAsync();
                 data.Path = base64Image;
                 _context.Banner.Update(data);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                return Ok(ex.Message);
-            }
-            return Json(null);
-        }
-        [HttpPost]
-        public async Task<IActionResult> SaveHeadMaster(HeadMasterVM model)
-        {
-            try
-            {
-                string base64Image = "data:image/jpeg;base64,";
-                if (model.ImgFiles != null)
-                {
-                    using (var ms = new MemoryStream())
-                    {
-                        model.ImgFiles.CopyTo(ms);
-                        var fileBytes = ms.ToArray();
-                        base64Image += Convert.ToBase64String(fileBytes);
-                    }
-                }
-                var data = await _context.HeadMaster.FirstOrDefaultAsync();
-                data.Name = model.Name;
-                data.Details = model.Details;
-                data.Image = model.ImgFiles == null ? data.Image : base64Image;
-                _context.HeadMaster.Update(data);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                return Ok(ex.Message);
-            }
-            return Json(null);
-        }
-        [HttpPost]
-        public async Task<IActionResult> SaveChairman(ChairmanVM model)
-        {
-            try
-            {
-                string base64Image = "data:image/jpeg;base64,";
-                if (model.ImgFiles != null)
-                {
-                    using (var ms = new MemoryStream())
-                    {
-                        model.ImgFiles.CopyTo(ms);
-                        var fileBytes = ms.ToArray();
-                        base64Image += Convert.ToBase64String(fileBytes);
-                    }
-                }
-                var data = await _context.Chairman.FirstOrDefaultAsync();
-                data.Name = model.Name;
-                data.Details = model.Details;
-                data.Image = model.ImgFiles == null ? data.Image : base64Image;
-                _context.Chairman.Update(data);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)

@@ -1,10 +1,9 @@
-﻿@model DashBoardVM;
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@Model.InstituteName</title>
+    <title>ওসমানপুর প্রাগপুর মাধ্যমিক বিদ্যালয়</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/lumen.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Web.styles.css" asp-append-version="true" />
@@ -24,8 +23,6 @@
                   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">আপলোড</a>
                   <div class="dropdown-menu" style="background: #08678c;">
                     <a class="dropdown-item" asp-area="Admin" asp-controller="AdminPanel" asp-action="Notice">নোটিশ আপলোড করুন</a>
-                    <a class="dropdown-item" asp-area="Admin" asp-controller="AdminPanel" asp-action="HeadMaster">প্রধান শিক্ষকের ছবি আপলোড করুন</a>
-                    <a class="dropdown-item" asp-area="Admin" asp-controller="AdminPanel" asp-action="Chairman">সভাপতির ছবি আপলোড করুন</a>
                     <a class="dropdown-item" asp-area="Admin" asp-controller="AdminPanel" asp-action="Banner">ব্যানার আপলোড করুন</a>
                   </div>
                 </li>
@@ -39,12 +36,14 @@
                   </div>
                 </li>
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ক্যাম্পাস</a>
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">প্রশাসন</a>
                   <div class="dropdown-menu" style="background: #08678c;">
-                    <a class="dropdown-item" asp-area="Admin" asp-controller="Campus" asp-action="AboutOurs">আমাদের সম্পর্কে</a>
-                    <a class="dropdown-item" asp-area="Admin" asp-controller="Campus" asp-action="History">ইতিহাস</a>
-                    <a class="dropdown-item" asp-area="Admin" asp-controller="Campus" asp-action="Aims">লক্ষ্য ও উদ্দেশ্য</a>
-                    <a class="dropdown-item" asp-area="Admin" asp-controller="Campus" asp-action="InstitutionalStructure">প্রাতিষ্ঠানিক কাঠামো</a>
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="HeadMaster">প্রধান শিক্ষক</a>
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="Chairman">সভাপতি</a>
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="GoverningBody">গভর্নিং বডি</a>
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="TeacherList">শিক্ষকদের তালিকা</a>
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="OfficialsList">কর্মকর্তাদের তালিকা</a>
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="Administration" asp-action="EmployeeList">কর্মচারীদের তালিকা</a>
                   </div>
                 </li>
               </ul>

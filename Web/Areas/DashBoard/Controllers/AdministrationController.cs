@@ -36,11 +36,6 @@ namespace Web.Areas.DashBoard.Controllers
             var data = await GetCommonData();
             return View(data);
         }
-        public async Task<IActionResult> AcademicCouncil()
-        {
-            var data = await GetCommonData();
-            return View(data);
-        }
         public async Task<IActionResult> TeacherList()
         {
             var data = await GetCommonData();

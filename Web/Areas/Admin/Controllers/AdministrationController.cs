@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Data;
+using Web.Models;
 using Web.Models.ViewModel;
 
 namespace Web.Areas.Admin.Controllers
@@ -13,46 +14,78 @@ namespace Web.Areas.Admin.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> AboutOurs()
+        public async Task<IActionResult> HeadMaster()
         {
-            var data = await GetData();
+            var data = await _context.HeadMaster.FirstOrDefaultAsync();
+            if (data == null)
+                data = new HeadMaster();
             return View(data);
         }
-        public async Task<IActionResult> History()
+        public async Task<IActionResult> Chairman()
         {
-            var data = await GetData();
+            var data = await _context.Chairman.FirstOrDefaultAsync();
+            if (data == null)
+                data = new Chairman();
             return View(data);
         }
-        public async Task<IActionResult> Aims()
+        public async Task<IActionResult> GoverningBody()
         {
-            var data = await GetData();
+            var data = await GetCommonData();
             return View(data);
         }
-        public async Task<IActionResult> InstitutionalStructure()
+        public async Task<IActionResult> TeacherList()
         {
-            var data = await GetData();
+            var data = await GetCommonData();
             return View(data);
         }
-        public async Task<AboutOursVM> GetData()
+        public async Task<IActionResult> OfficialsList()
         {
-            var response = await _context.AboutOurs.FirstOrDefaultAsync();
-            var data = new AboutOursVM
+            var data = await GetCommonData();
+            return View(data);
+        }
+        public async Task<IActionResult> EmployeeList()
+        {
+            var data = await GetCommonData();
+            return View(data);
+        }
+        public async Task<DashBoardVM> GetCommonData()
+        {
+            var institute = await _context.Institute.FirstOrDefaultAsync();
+            var data = new DashBoardVM
             {
-                AboutOurself = response.AboutOurself,
-                History = response.History,
-                Aims = response.Aims,
-                InstitutionalStructure = response.InstitutionalStructure
+                InstituteName = institute == null ? string.Empty : institute.Name,
             };
             return data;
         }
+
         [HttpPost]
-        public async Task<IActionResult> SaveAboutOurs(AboutOursVM model)
+        public async Task<IActionResult> SaveHeadMaster(HeadMaster model)
         {
             try
             {
-                var data = await _context.AboutOurs.FirstOrDefaultAsync();
-                data.AboutOurself = model.AboutOurself;
-                _context.AboutOurs.Update(data);
+                string base64Image = "data:image/jpeg;base64,";
+                if (model.ImgFiles != null)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        model.ImgFiles.CopyTo(ms);
+                        var fileBytes = ms.ToArray();
+                        base64Image += Convert.ToBase64String(fileBytes);
+                    }
+                }
+                var data = await _context.HeadMaster.FirstOrDefaultAsync();
+                if(data == null)
+                {
+                    model.Image = base64Image;
+                    _context.HeadMaster.Add(model);
+                }
+                else
+                {
+                    data.Name = model.Name;
+                    data.Details = model.Details;
+                    data.Image = model.ImgFiles == null ? data.Image : base64Image;
+                    _context.HeadMaster.Update(data);
+                }
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -62,45 +95,33 @@ namespace Web.Areas.Admin.Controllers
             return Json(null);
         }
         [HttpPost]
-        public async Task<IActionResult> SaveHistory(AboutOursVM model)
+        public async Task<IActionResult> SaveChairman(Chairman model)
         {
             try
             {
-                var data = await _context.AboutOurs.FirstOrDefaultAsync();
-                data.History = model.History;
-                _context.AboutOurs.Update(data);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                return Ok(ex.Message);
-            }
-            return Json(null);
-        }
-        [HttpPost]
-        public async Task<IActionResult> SaveAims(AboutOursVM model)
-        {
-            try
-            {
-                var data = await _context.AboutOurs.FirstOrDefaultAsync();
-                data.Aims = model.Aims;
-                _context.AboutOurs.Update(data);
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                return Ok(ex.Message);
-            }
-            return Json(null);
-        }
-        [HttpPost]
-        public async Task<IActionResult> SaveInstitutionalStructure(AboutOursVM model)
-        {
-            try
-            {
-                var data = await _context.AboutOurs.FirstOrDefaultAsync();
-                data.InstitutionalStructure = model.InstitutionalStructure;
-                _context.AboutOurs.Update(data);
+                string base64Image = "data:image/jpeg;base64,";
+                if (model.ImgFiles != null)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        model.ImgFiles.CopyTo(ms);
+                        var fileBytes = ms.ToArray();
+                        base64Image += Convert.ToBase64String(fileBytes);
+                    }
+                }
+                var data = await _context.Chairman.FirstOrDefaultAsync();
+                if(data == null)
+                {
+                    model.Image = base64Image;
+                    _context.Chairman.Add(model);
+                }
+                else
+                {
+                    data.Name = model.Name;
+                    data.Details = model.Details;
+                    data.Image = model.ImgFiles == null ? data.Image : base64Image;
+                    _context.Chairman.Update(data);
+                }
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)
