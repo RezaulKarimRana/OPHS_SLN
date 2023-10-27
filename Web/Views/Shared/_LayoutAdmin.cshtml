@@ -20,10 +20,16 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
               <ul class="navbar-nav me-auto">
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">আপলোড</a>
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">নোটিশ</a>
                   <div class="dropdown-menu" style="background: #08678c;">
-                    <a class="dropdown-item" asp-area="Admin" asp-controller="AdminPanel" asp-action="Notice">নোটিশ আপলোড করুন</a>
-                    <a class="dropdown-item" asp-area="Admin" asp-controller="AdminPanel" asp-action="Banner">ব্যানার আপলোড করুন</a>
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="Notice" asp-action="NoticeCreate">নোটিশ লিখুন</a>
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="Notice" asp-action="NoticeList">নোটিশ তালিকা</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">ব্যানার</a>
+                  <div class="dropdown-menu" style="background: #08678c;">
+                    <a class="dropdown-item" asp-area="Admin" asp-controller="Banner" asp-action="BannerList">ব্যানার তালিকা</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">

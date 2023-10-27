@@ -37,33 +37,6 @@
                 </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-header">
-                <b>সকল নোটিশ</b>
-            </div>
-            <div class="card-body">
-                <table class="table table-bordered table-striped">
-                    <thead style="text-align:center">
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">নাম</th>
-                            <th scope="col">নোটিশ</th>
-                        </tr>
-                    </thead>
-                    <tbody style="text-align:center">
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td style="text-align: center;">@item.Id</td>
-                                <td>@item.Name</td>
-                                <td>@item.CreatedDate</td>
-                                <td><a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeView" asp-route-id="@item.Id" target="_blank"><img src="/img/icon/pdf.png" width="40" height="40" /></a></td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
 </div>
 @section Scripts{
@@ -96,14 +69,14 @@
             formData.append("Name", $('#name').val());
             $.ajax({
                 type: "POST",
-                url: '/Admin/AdminPanel/SaveNotice',
+                url: '/Admin/Notice/SaveNotice',
                 data: formData,
                 dataType: 'json',
                 contentType: false,
                 processData: false,
                 success: function(response) {
                     alertify.success("Successfully Added");
-                    location.reload();
+                    window.location.href("Admin/Notice/NoticeList");
                 }
             });
         });
