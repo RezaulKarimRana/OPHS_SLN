@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Web.Data;
 using Web.Models;
-using Web.Models.ViewModel;
 
 namespace Web.Areas.Admin.Controllers
 {
@@ -14,54 +13,33 @@ namespace Web.Areas.Admin.Controllers
         {
             _context = context;
         }
-        public IActionResult NoticeCreate()
+        public IActionResult Index()
         {
             return View();
         }
-        public async Task<IActionResult> NoticeList()
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
         {
-            var data = await _context.Notice.OrderByDescending(x => x.Id).ToListAsync();
-            var response = new List<NoticeVM>();
-            foreach (var item in data)
-            {
-                response.Add(new NoticeVM
-                {
-                    Id = item.Id,
-                    Serial = ConvertEnToBn(item.Id.ToString()),
-                    Name = item.Name,
-                    CreatedDate = ConvertEnToBn(item.CreatedDate),
-                    FileName = item.FileName
-                });
-            }
-            return View(response);
+            var data = await _context.Notice.OrderByDescending(x=> x.Id).ToListAsync();
+            return Json(data);
         }
         [HttpPost]
-        public async Task<IActionResult> SaveNotice(NoticeVM model)
+        public async Task<IActionResult> Save(Notice model)
         {
-            if(model.ImgFiles == null)
-            {
-                return Ok("Please add a Notice");
-            }
             try
             {
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
-                var fileName = Guid.NewGuid().ToString() + "_" + model.ImgFiles.FileName;
-                if (model.ImgFiles != null)
+                var serial = 1;
+                var allNotice = await _context.Notice.ToListAsync();
+                if(allNotice.Any())
                 {
-                    Directory.CreateDirectory(pathToSave);
-                    string filePath = Path.Combine(pathToSave, fileName);
-                    using (Stream fileStream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await model.ImgFiles.CopyToAsync(fileStream);
-                    }
+                    serial = allNotice.Count + 1;
                 }
                 var notice = new Notice
                 {
+                    Serial = ConvertEnToBn(serial.ToString()),
                     Name = model.Name,
-                    FileName = model.ImgFiles.FileName,
-                    FileType = model.ImgFiles.ContentType,
-                    FilePath = fileName,
-                    CreatedDate = DateTime.Now.ToShortDateString()
+                    Details = model.Details,
+                    CreatedDate = ConvertEnToBn(DateTime.Now.ToShortDateString())
                 };
                 _context.Notice.Add(notice);
                 await _context.SaveChangesAsync();
@@ -70,7 +48,26 @@ namespace Web.Areas.Admin.Controllers
             {
                 return Ok(ex.Message);
             }
-            return Json(null);
+            return Json(new { Success = true });
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var previousInfo = await _context.Notice.Where(x => x.Id == id).FirstOrDefaultAsync();
+                if(previousInfo == null)
+                {
+                    return Ok();
+                }
+                _context.Notice.Remove(previousInfo);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message);
+            }
+            return Json(new { Success = true });
         }
         public string ConvertEnToBn(string data)
         {

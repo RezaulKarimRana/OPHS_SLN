@@ -49,8 +49,7 @@ namespace Web.Areas.DashBoard.Controllers
                         Id = item.Id,
                         Serial = ConvertEnToBn(item.Id.ToString()),
                         Name = item.Name,
-                        CreatedDate = ConvertEnToBn(item.CreatedDate),
-                        FileName = item.FileName
+                        CreatedDate = ConvertEnToBn(item.CreatedDate)
                     });
                 }
             }

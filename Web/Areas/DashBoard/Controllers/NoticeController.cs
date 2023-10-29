@@ -27,8 +27,7 @@ namespace Web.Areas.DashBoard.Controllers
                     Id = item.Id,
                     Serial = ConvertEnToBn(item.Id.ToString()),
                     Name = item.Name,
-                    CreatedDate = ConvertEnToBn(item.CreatedDate),
-                    FileName = item.FileName
+                    CreatedDate = ConvertEnToBn(item.CreatedDate)
                 });
             }
             data.Notices = response;
@@ -76,28 +75,6 @@ namespace Web.Areas.DashBoard.Controllers
                     .Replace("7", "\u09ED")
                     .Replace("8", "\u09EE")
                     .Replace("9", "\u09EF");
-        }
-        public async Task<IActionResult> NoticeView(int id)
-        {
-            var notice = await _context.Notice.Where(x => x.Id == id).FirstOrDefaultAsync();
-
-            if (notice == null)
-            {
-                return Content("File Name is Empty...");
-            }
-
-            var folderName = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", notice.FilePath);
-            string fileName = notice.FileName;
-
-            var memoryStream = new MemoryStream();
-
-            using (var stream = new FileStream(folderName, FileMode.Open))
-            {
-                await stream.CopyToAsync(memoryStream);
-            }
-            memoryStream.Position = 0;
-            var contentType = GetContentType(folderName);
-            return File(memoryStream, contentType);
         }
         private string GetContentType(string path)
         {
