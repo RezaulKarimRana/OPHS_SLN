@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Web.Data;
 using Web.Models;
 using Web.Models.ViewModel;
+using static Web.Models.ApplicationConstants;
 
 namespace Web.Areas.Admin.Controllers
 {
@@ -43,9 +44,26 @@ namespace Web.Areas.Admin.Controllers
             var data = await GetCommonData();
             return View(data);
         }
-        public async Task<IActionResult> EmployeeList()
+        public async Task<IActionResult> Employees()
         {
-            var data = await GetCommonData();
+            var data = await _context.Member.Where(x => x.DesignationId == (int)DesignationType.Employee).ToListAsync();
+            if(data.Any())
+            {
+                var folderName = string.Empty;
+                var imgPrefix = "data:image/jpeg;base64,";
+                foreach (var item in data)
+                {
+                    folderName = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", item.FilePath);
+                    var memoryStream = new MemoryStream();
+
+                    using (var stream = new FileStream(folderName, FileMode.Open))
+                    {
+                        await stream.CopyToAsync(memoryStream);
+                    }
+                    memoryStream.Position = 0;
+                    item.Base64Image = imgPrefix + Convert.ToBase64String(memoryStream.ToArray());
+                }
+            }
             return View(data);
         }
         public async Task<DashBoardVM> GetCommonData()
@@ -122,6 +140,80 @@ namespace Web.Areas.Admin.Controllers
                     data.Image = model.ImgFiles == null ? data.Image : base64Image;
                     _context.Chairman.Update(data);
                 }
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message);
+            }
+            return Json(null);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SaveEmployee(Member model)
+        {
+            if (model.ImgFiles == null)
+            {
+                return Ok("Please add an Image");
+            }
+            try
+            {
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+                var fileName = Guid.NewGuid().ToString() + "_" + model.ImgFiles.FileName;
+                if (model.ImgFiles != null)
+                {
+                    Directory.CreateDirectory(pathToSave);
+                    string filePath = Path.Combine(pathToSave, fileName);
+                    using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.ImgFiles.CopyToAsync(fileStream);
+                    }
+                }
+                var member = new Member
+                {
+                    Name = model.Name,
+                    PhoneNumber = model.PhoneNumber,
+                    DesignationId = (int)DesignationType.Employee,
+                    FileName = model.ImgFiles.FileName,
+                    FileType = model.ImgFiles.ContentType,
+                    FilePath = fileName,
+                    CreatedDate = DateTime.Now.ToShortDateString()
+                };
+                _context.Member.Add(member);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return Ok(ex.Message);
+            }
+            return Json(null);
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateEmployee(Member model)
+        {
+            try
+            {
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+                var fileName = Guid.NewGuid().ToString() + "_" + model.ImgFiles.FileName;
+                if (model.ImgFiles != null)
+                {
+                    Directory.CreateDirectory(pathToSave);
+                    string filePath = Path.Combine(pathToSave, fileName);
+                    using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.ImgFiles.CopyToAsync(fileStream);
+                    }
+                }
+                var member = new Member
+                {
+                    Name = model.Name,
+                    PhoneNumber = model.PhoneNumber,
+                    DesignationId = (int)DesignationType.Employee,
+                    FileName = model.ImgFiles.FileName,
+                    FileType = model.ImgFiles.ContentType,
+                    FilePath = fileName,
+                    CreatedDate = DateTime.Now.ToShortDateString()
+                };
+                _context.Member.Add(member);
                 await _context.SaveChangesAsync();
             }
             catch (Exception ex)

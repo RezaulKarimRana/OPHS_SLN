@@ -1,0 +1,284 @@
+﻿<style type="text/css">
+    .profile {
+        float: right;
+        padding: 10px;
+        margin-top: 10px;
+        margin-right: 30px;
+    }
+</style>
+<div class="container" style="margin-top:20px">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <b>সদস্যদের তালিকা</b>
+                    <button type="button" class="btn btn-info btn-sm profile" data-toggle="modal" data-target="#addEmployeeModal">
+                        <i class="fas fa-plus-circle text-dark"><b style="margin-left:5px">সদস্য</b></i>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped">
+                        <thead style="text-align:center">
+                            <tr>
+                                <th scope="col">নাম</th>
+                                <th scope="col">মোবাইল</th>
+                                <th scope="col">ছবি</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody style="text-align:center" id="employeeTable">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container">
+                    <div class="card">
+                        <div class="card-header">
+                            <b>নতুন সদস্য যোগ করুন</b>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-12">
+                                <div class="form-group row mb-4">
+                                    <label class="col-sm-2 col-form-label-sm">নামঃ</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="name" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-4">
+                                    <label class="col-sm-2 col-form-label-sm">মোবাইলঃ</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" id="phone" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-4">
+                                    <label class="col-sm-2 col-form-label-sm">ছবিঃ</label>
+                                    <div class="col-sm-8">
+                                        <input type="file" id="img">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="save" class="btn btn-info btn-sm profile">হালনাগাদ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="editEmployeeModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container">
+                    <div class="card">
+                        <div class="card-header">
+                            <b>সদস্যদের তথ্য পরিবর্তন করুন</b>
+                        </div>
+                        <div class="card-body">
+                            <div class="col-12">
+                                <div hidden class="form-group row mb-4">
+                                    <label class="col-sm-2 col-form-label-sm">নামঃ</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="id" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-4">
+                                    <label class="col-sm-2 col-form-label-sm">নামঃ</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="editName" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-4">
+                                    <label class="col-sm-2 col-form-label-sm">মোবাইলঃ</label>
+                                    <div class="col-sm-8">
+                                        <input type="number" id="editPhone" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-4">
+                                    <label class="col-sm-2 col-form-label-sm">ছবিঃ</label>
+                                    <div class="col-sm-8">
+                                        <img src="" id="imgSrc" height="100" width="150" />
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-4">
+                                    <label class="col-sm-2 col-form-label-sm">নতুন ছবিঃ</label>
+                                    <div class="col-sm-8">
+                                        <input type="file" id="editImg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="update" class="btn btn-info btn-sm profile">হালনাগাদ করুন</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        var allEmployees = [];
+        var rowTableIdx = 0;
+        $(document).ready(function() {
+            getAllEmployees();
+        });
+        function getAllEmployees() {
+            $.ajax({
+                type: "GET",
+                url: "/Admin/CommetteeMember/GetAll",
+                success: function(response) {
+                    if (response != null) {
+                        allEmployees = response;
+                        $('#employeeTable').empty();
+                        for (var i = 0; i < allEmployees.length; i++) {
+                            $('#employeeTable').append(
+                                `<tr id="Item${++rowTableIdx}">
+                                    <td class="text-center" id="name${rowTableIdx}">` + allEmployees[i].name + `</td>
+                                    <td class="text-center" id="phoneNumber${rowTableIdx}">` + allEmployees[i].phoneNumber + `</td>
+                                    <td class="text-center">
+                                        <img src=`+ allEmployees[i].base64Image + ` height="100" width="150" />
+                                    </td>
+                                    <td class="text-center">
+                                        <a id="` + allEmployees[i].id + `" class="editEmployee" style="cursor:pointer"><i class="fas fa-edit" style="color:#1E90FF"></i></a>
+                                        <a id="` + allEmployees[i].id + `" class="deleteEmployee" style="cursor:pointer"><i class="fas fa-trash" style="color:red"></i></a>
+                                    </td>
+                                </tr>`
+                            );
+                        }
+                    }
+                }
+            });
+        }
+        $("#img").change(function(e) {
+            for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+
+                var file = e.originalEvent.srcElement.files[i];
+
+                var img = document.createElement("img");
+                var reader = new FileReader();
+                reader.onloadend = function() {
+                    img.src = reader.result;
+                    img.width = 350;
+                    img.height = 200;
+                }
+                reader.readAsDataURL(file);
+                $("#img").after(img);
+            }
+        });
+        $("#editImg").change(function(e) {
+            for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+
+                var file = e.originalEvent.srcElement.files[i];
+
+                var img = document.createElement("img");
+                var reader = new FileReader();
+                reader.onloadend = function() {
+                    img.src = reader.result;
+                    img.width = 350;
+                    img.height = 200;
+                }
+                reader.readAsDataURL(file);
+                $("#editImg").after(img);
+            }
+        });
+        $("#save").click(function() {
+            var formData = new FormData();
+            var totalFiles = document.getElementById("img").files.length;
+            for (var i = 0; i < totalFiles; i++) {
+                var file = document.getElementById("img").files[i];
+                formData.append("ImgFiles", file);
+            }
+            formData.append("Name", $('#name').val());
+            formData.append("PhoneNumber", $('#phone').val());
+            $.ajax({
+                type: "POST",
+                url: '/Admin/CommetteeMember/Save',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    alertify.success("হালনাগাদ সম্পন্ন হয়েছে");
+                    getAllEmployees();
+                    $('#addEmployeeModal').modal('hide');
+                }
+            });
+        });
+        $('#employeeTable').on('click', '.editEmployee', function() {
+
+            var id = parseInt(this.id);
+            var data = allEmployees.filter(x => x.id == id)[0];
+            $("#id").val(data.id);
+            $("#editName").val(data.name);
+            $("#editPhone").val(data.phoneNumber);
+            $("#imgSrc").attr("src", data.base64Image);
+            $('#editEmployeeModal').modal('show');
+        });
+        $('#employeeTable').on('click', '.deleteEmployee', function() {
+            var id = parseInt(this.id);
+            $.confirm({
+                title: 'আপনি কি তথ্য মুছে ফেলতে ইচ্ছুক?',
+                content: 'একবার মুছে ফেললে তথ্যটি আর দেখতে পাবেন না!',
+                type: 'red',
+                buttons: {
+                    yes: {
+                        btnClass: 'btn-danger',
+                        keys: ['enter'],
+                        action: function() {
+                            $.ajax({
+                                type: "GET",
+                                url: "/Admin/CommetteeMember/Delete?id=" + id,
+                                data: "{}",
+                                success: function(response) {
+                                    if (response.success) {
+                                        alertify.success("ডিলিট সম্পন্ন হয়েছে");
+                                        getAllEmployees();
+                                    }
+                                }
+                            });
+                        }
+                    },
+                    no: function() {
+                    }
+                }
+            });
+        });
+        $("#update").click(function() {
+            var formData = new FormData();
+            var totalFiles = document.getElementById("editImg").files.length;
+            for (var i = 0; i < totalFiles; i++) {
+                var file = document.getElementById("editImg").files[i];
+                formData.append("ImgFiles", file);
+            }
+            formData.append("Id", $('#id').val());
+            formData.append("Name", $('#editName').val());
+            formData.append("PhoneNumber", $('#editPhone').val());
+            $.ajax({
+                type: "POST",
+                url: '/Admin/CommetteeMember/Update',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    alertify.success("হালনাগাদ সম্পন্ন হয়েছে");
+                    getAllEmployees();
+                    $('#editEmployeeModal').modal('hide');
+                }
+            });
+        });
+    </script>
+}
