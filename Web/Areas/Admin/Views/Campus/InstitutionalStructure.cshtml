@@ -1,29 +1,31 @@
 ﻿@model AboutOurs;
 <style type="text/css">
-    .profile {
-        float: right;
-        padding: 10px;
-        margin-top: 10px;
+        .profile {
+            float: right;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        textarea {
+         width: 100%;
+         -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+         -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+         box-sizing: border-box;         /* Opera/IE 8+ */
     }
-    textarea {
-     width: 100%;
-     -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-     box-sizing: border-box;         /* Opera/IE 8+ */
-}
 </style>
 <div class="container" style="margin-top:20px">
     <div class="row">
-        <div class="card">
-            <div class="card-header">
-                <b>প্রাতিষ্ঠানিক কাঠামো সম্পর্কে লিখুন</b>
-            </div>
-            <div class="card-body">
-                <div class="col-12">
-                    <textarea id="institutionalStructure" rows="13">@Model.InstitutionalStructure</textarea>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <b>প্রাতিষ্ঠানিক কাঠামো সম্পর্কে লিখুন</b>
                 </div>
-                <div class="col-12">
-                    <button id="save" class="btn btn-success btn-sm profile">হালনাগাদ করুন</button>
+                <div class="card-body">
+                    <div class="col-12">
+                        <textarea id="institutionalStructure" rows="13">@Model.InstitutionalStructure</textarea>
+                    </div>
+                    <div class="col-12">
+                        <button id="save" class="btn btn-info btn-sm profile">হালনাগাদ করুন</button>
+                    </div>
                 </div>
             </div>
         </div>
