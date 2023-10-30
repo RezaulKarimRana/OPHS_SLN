@@ -1,5 +1,4 @@
-﻿using AspNetCore.Reporting;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Data;
 using Web.Models.ViewModel;
@@ -684,26 +683,6 @@ namespace Web.Areas.DashBoard.Controllers
                 {".z", "application/x-compress"},
                 {".zip", "application/zip"}
             };
-        }
-        public async Task<IActionResult> NoticeDownload(int id)
-        {
-            var notice = await _context.Notice.Where(x => x.Id == id).FirstOrDefaultAsync();
-
-            if (notice == null)
-            {
-                return Content("File Name is Empty...");
-            }
-            string mimeType = "application/pdf";
-            int extension = 1;
-            var path = Path.Combine(Directory.GetCurrentDirectory(), "Notice", "NoticeGenerator.rdlc");
-            Dictionary<string, string> parameters = new()
-            {
-                { "Subject", "Chart of Accounts" },
-                { "Details", "DrillTech International" }
-            };
-            LocalReport report = new(path);
-            var result = report.Execute(RenderType.Pdf, extension, parameters, mimeType);
-            return File(result.MainStream, mimeType);
         }
     }
 }

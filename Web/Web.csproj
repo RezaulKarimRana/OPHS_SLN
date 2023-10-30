@@ -8,15 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Notice\NoticeGenerator.rdlc" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Notice\NoticeGenerator.rdlc" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="AspNetCore.Reporting" Version="2.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.21" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.21" />
@@ -29,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Notice\" />
     <Folder Include="Uploads\" />
     <Folder Include="wwwroot\img\banner\" />
     <Folder Include="wwwroot\img\gallery\" />

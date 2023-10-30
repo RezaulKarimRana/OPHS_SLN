@@ -26,6 +26,10 @@ namespace Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(Notice model)
         {
+            if (model.ImgFiles == null)
+            {
+                return Ok("Please add a Notice");
+            }
             try
             {
                 var serial = 1;
@@ -34,12 +38,25 @@ namespace Web.Areas.Admin.Controllers
                 {
                     serial = allNotice.Count + 1;
                 }
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), "Notice");
+                var fileName = Guid.NewGuid().ToString() + "_" + model.ImgFiles.FileName;
+                if (model.ImgFiles != null)
+                {
+                    Directory.CreateDirectory(pathToSave);
+                    string filePath = Path.Combine(pathToSave, fileName);
+                    using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.ImgFiles.CopyToAsync(fileStream);
+                    }
+                }
                 var notice = new Notice
                 {
                     Serial = ConvertEnToBn(serial.ToString()),
                     Name = model.Name,
-                    Details = model.Details,
-                    CreatedDate = ConvertEnToBn(DateTime.Now.ToShortDateString())
+                    CreatedDate = ConvertEnToBn(DateTime.Now.ToShortDateString()),
+                    FileName = model.ImgFiles.FileName,
+                    FileType = model.ImgFiles.ContentType,
+                    FilePath = fileName
                 };
                 _context.Notice.Add(notice);
                 await _context.SaveChangesAsync();
@@ -56,12 +73,17 @@ namespace Web.Areas.Admin.Controllers
             try
             {
                 var previousInfo = await _context.Notice.Where(x => x.Id == id).FirstOrDefaultAsync();
-                if(previousInfo == null)
+                if (previousInfo != null && previousInfo.FilePath != null)
                 {
-                    return Ok();
+                    var pathToDelete = Path.Combine(Directory.GetCurrentDirectory(), "Notice", previousInfo.FilePath);
+                    var file_delete = new FileInfo(pathToDelete);
+                    if (file_delete.Exists)
+                    {
+                        file_delete.Delete();
+                    }
+                    _context.Notice.Remove(previousInfo);
+                    await _context.SaveChangesAsync();
                 }
-                _context.Notice.Remove(previousInfo);
-                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {

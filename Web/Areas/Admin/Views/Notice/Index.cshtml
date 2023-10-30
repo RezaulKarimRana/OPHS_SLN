@@ -5,12 +5,6 @@
         margin-top: 10px;
         margin-right: 30px;
     }
-        textarea {
-         width: 100%;
-         -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-         -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-         box-sizing: border-box;         /* Opera/IE 8+ */
-    }
 </style>
 <div class="container" style="margin-top:20px">
     <div class="row">
@@ -40,7 +34,6 @@
         </div>
     </div>
 </div>
-
 <div class="modal fade" id="addNoticeModal" tabindex="-1" role="dialog" aria-labelledby="addNoticeModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -59,13 +52,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group row mb-4">
-                                    <label class="col-sm-2 col-form-label-sm">বিস্তারিতঃ</label>
-                                    <div class="col-sm-10">
-                                        <textarea id="details" rows="13"></textarea>
+                                    <label class="col-sm-2 col-form-label-sm">নোটিশঃ</label>
+                                    <div class="col-sm-8">
+                                        <input type="file" id="img">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
                             </div>
                         </div>
                     </div>
@@ -73,40 +64,6 @@
             </div>
             <div class="modal-footer">
                 <button id="save" class="btn btn-info btn-sm profile">হালনাগাদ করুন</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="editNoticeModal" tabindex="-1" role="dialog" aria-labelledby="editNoticeModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="container">
-                    <div class="card">
-                        <div class="card-header">
-                            <b>নোটিশের তথ্য পরিবর্তন করুন</b>
-                        </div>
-                        <div class="card-body">
-                            <div class="col-12">
-                                <div hidden class="form-group row mb-4">
-                                    <label class="col-sm-2 col-form-label-sm">শিরোনামঃ</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" id="id" class="form-control" />
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-sm-2 col-form-label-sm">বিস্তারিতঃ</label>
-                                    <div class="col-sm-10">
-                                        <textarea id="details" rows="13"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button id="update" class="btn btn-info btn-sm profile">হালনাগাদ করুন</button>
             </div>
         </div>
     </div>
@@ -133,7 +90,6 @@
                                     <td class="text-center" id="name${rowTableIdx}">` + allNotice[i].name + `</td>
                                     <td class="text-center" id="createdDate${rowTableIdx}">` + allNotice[i].createdDate + `</td>
                                     <td class="text-center">
-                                        <a id="` + allNotice[i].id + `" class="editNotice" style="cursor:pointer"><i class="fas fa-edit" style="color:#1E90FF"></i></a>
                                         <a id="` + allNotice[i].id + `" class="deleteNotice" style="cursor:pointer"><i class="fas fa-trash" style="color:red"></i></a>
                                     </td>
                                 </tr>`
@@ -145,6 +101,11 @@
         }
         $("#save").click(function() {
             var formData = new FormData();
+            var totalFiles = document.getElementById("img").files.length;
+            for (var i = 0; i < totalFiles; i++) {
+                var file = document.getElementById("img").files[i];
+                formData.append("ImgFiles", file);
+            }
             formData.append("Name", $('#name').val());
             formData.append("Details", $('#details').val());
             $.ajax({
@@ -161,20 +122,11 @@
                 }
             });
         });
-        $('#noticeTable').on('click', '.editNotice', function() {
-
-            var id = parseInt(this.id);
-            var data = allNotice.filter(x => x.id == id)[0];
-            $("#id").val(data.id);
-            $("#editName").val(data.name);
-            $("#editDetails").val(data.details);
-            $('#editNoticeModal').modal('show');
-        });
         $('#noticeTable').on('click', '.deleteNotice', function() {
             var id = parseInt(this.id);
             $.confirm({
-                title: 'আপনি কি তথ্য মুছে ফেলতে ইচ্ছুক?',
-                content: 'একবার মুছে ফেললে তথ্যটি আর দেখতে পাবেন না!',
+                title: 'আপনি কি নোটিশ মুছে ফেলতে ইচ্ছুক?',
+                content: 'একবার মুছে ফেললে নোটিশটি আর দেখতে পাবেন না!',
                 type: 'red',
                 buttons: {
                     yes: {
@@ -196,30 +148,6 @@
                     },
                     no: function() {
                     }
-                }
-            });
-        });
-        $("#update").click(function() {
-            var formData = new FormData();
-            var totalFiles = document.getElementById("editImg").files.length;
-            for (var i = 0; i < totalFiles; i++) {
-                var file = document.getElementById("editImg").files[i];
-                formData.append("ImgFiles", file);
-            }
-            formData.append("Id", $('#id').val());
-            formData.append("Name", $('#editName').val());
-            formData.append("Details", $('#editDetails').val());
-            $.ajax({
-                type: "POST",
-                url: '/Admin/Notice/Update',
-                data: formData,
-                dataType: 'json',
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    alertify.success("হালনাগাদ সম্পন্ন হয়েছে");
-                    getAllNotice();
-                    $('#editNoticeModal').modal('hide');
                 }
             });
         });
