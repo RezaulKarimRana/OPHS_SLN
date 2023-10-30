@@ -39,20 +39,6 @@ namespace Web.Areas.DashBoard.Controllers
             var headMaster = await _context.HeadMaster.FirstOrDefaultAsync();
             var chairman = await _context.Chairman.FirstOrDefaultAsync();
             var allNotice = await _context.Notice.OrderByDescending(x => x.Id).ToListAsync();
-            var noticeVM = new List<NoticeVM>();
-            if(allNotice != null)
-            {
-                foreach (var item in allNotice)
-                {
-                    noticeVM.Add(new NoticeVM
-                    {
-                        Id = item.Id,
-                        Serial = ConvertEnToBn(item.Id.ToString()),
-                        Name = item.Name,
-                        CreatedDate = ConvertEnToBn(item.CreatedDate)
-                    });
-                }
-            }
             var dashBoardModel = new DashBoardVM
             {
                 InstituteName = institute == null ? string.Empty : institute.Name,
@@ -62,7 +48,7 @@ namespace Web.Areas.DashBoard.Controllers
                 HeadMasterImage = headMaster == null ? string.Empty : headMaster.Image,
                 ChairmanName =  chairman == null ? string.Empty : chairman.Name,
                 ChairmanImage =  chairman == null ? string.Empty : chairman.Image,
-                Notices = noticeVM
+                Notices = allNotice
             };
             if(banner != null)
             {

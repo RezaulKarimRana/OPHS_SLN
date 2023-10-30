@@ -17,25 +17,35 @@ namespace Web.Areas.DashBoard.Controllers
         public async Task<IActionResult> AllNotice()
         {
             var data = await GetCommonData();
-            var allNotice = await _context.Notice.OrderByDescending(x=> x.Id).ToListAsync();
-            var response = new List<NoticeVM>();
-            foreach (var item in allNotice)
-            {
-                response.Add(new NoticeVM
-                {
-                    Id = item.Id,
-                    Serial = ConvertEnToBn(item.Id.ToString()),
-                    Name = item.Name,
-                    CreatedDate = ConvertEnToBn(item.CreatedDate)
-                });
-            }
-            data.Notices = response;
+            data.Notices = await _context.Notice.OrderByDescending(x=> x.Id).ToListAsync();
             return View(data);
         }
         public async Task<IActionResult> AllAssignment()
         {
             var data = await GetCommonData();
             return View(data);
+        }
+        public async Task<IActionResult> NoticeDownload(int id)
+        {
+            var notice = await _context.Notice.Where(x => x.Id == id).FirstOrDefaultAsync();
+
+            if (notice == null)
+            {
+                return Content("File Name is Empty...");
+            }
+
+            var folderName = Path.Combine(Directory.GetCurrentDirectory(), "Notice", notice.FilePath);
+            string fileName = notice.FileName;
+
+            var memoryStream = new MemoryStream();
+
+            using (var stream = new FileStream(folderName, FileMode.Open))
+            {
+                await stream.CopyToAsync(memoryStream);
+            }
+            memoryStream.Position = 0;
+            var contentType = GetContentType(folderName);
+            return File(memoryStream, contentType);
         }
         public async Task<DashBoardVM> GetCommonData()
         {
@@ -61,19 +71,6 @@ namespace Web.Areas.DashBoard.Controllers
                     data.Banner6Src = banner[5].Path;
             }
             return data;
-        }
-        public string ConvertEnToBn(string data)
-        {
-            return data.Replace("0", "\u09E6")
-                    .Replace("1", "\u09E7")
-                    .Replace("2", "\u09E8")
-                    .Replace("3", "\u09E9")
-                    .Replace("4", "\u09EA")
-                    .Replace("5", "\u09EB")
-                    .Replace("6", "\u09EC")
-                    .Replace("7", "\u09ED")
-                    .Replace("8", "\u09EE")
-                    .Replace("9", "\u09EF");
         }
         private string GetContentType(string path)
         {

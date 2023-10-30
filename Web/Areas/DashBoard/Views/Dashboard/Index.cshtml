@@ -24,43 +24,30 @@
                                 if(Model.Notices.Count >= 1)
                                 {
                                     <li style="margin:1px">
-                                        <a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeView" asp-route-id="@Model.Notices[0].Id" target="_blank" style="margin:0"> @Model.Notices[0].Name <i>(@Model.Notices[0].CreatedDate)</i></a>
+                                        <a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeDownload" asp-route-id="@Model.Notices[0].Id" target="_blank" style="margin:0"> @Model.Notices[0].Name <i>(@Model.Notices[0].CreatedDate)</i></a>
                                     </li>
                                 }
                                 if(Model.Notices.Count >= 2)
                                 {
                                     <li style="margin:1px">
-                                        <a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeView" asp-route-id="@Model.Notices[1].Id" target="_blank" style="margin:0"> @Model.Notices[1].Name <i>(@Model.Notices[1].CreatedDate)</i></a>
+                                        <a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeDownload" asp-route-id="@Model.Notices[1].Id" target="_blank" style="margin:0"> @Model.Notices[1].Name <i>(@Model.Notices[1].CreatedDate)</i></a>
                                     </li>
                                 }
                                 if(Model.Notices.Count >= 3)
                                 {
                                     <li style="margin:1px">
-                                        <a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeView" asp-route-id="@Model.Notices[2].Id" target="_blank" style="margin:0"> @Model.Notices[2].Name <i>(@Model.Notices[2].CreatedDate)</i></a>
+                                        <a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeDownload" asp-route-id="@Model.Notices[2].Id" target="_blank" style="margin:0"> @Model.Notices[2].Name <i>(@Model.Notices[2].CreatedDate)</i></a>
                                     </li>
                                 }
                                 if(Model.Notices.Count >= 4)
                                 {
                                     <li style="margin:1px">
-                                        <a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeView" asp-route-id="@Model.Notices[3].Id" target="_blank" style="margin:0"> @Model.Notices[3].Name <i>(@Model.Notices[3].CreatedDate)</i></a>
+                                        <a asp-area="DashBoard" asp-controller="Notice" asp-action="NoticeDownload" asp-route-id="@Model.Notices[3].Id" target="_blank" style="margin:0"> @Model.Notices[3].Name <i>(@Model.Notices[3].CreatedDate)</i></a>
                                     </li>
                                 }
                             }
                         </ul>
                         <a class="btn right" asp-area="DashBoard" asp-controller="Notice" asp-action="AllNotice">সকল নোটিশ</a>
-                    </div>
-                </div>
-            </div>
-            <div style=" background-color: #EFEFEF;border: 1px solid #CCCCCC;margin-bottom: 10px;padding: 5px;" class="row" id="bdes">
-                <h5 style="float:left;margin:-3px 5px 0 0; font-weight:bold;font-size:.9em">খবর:</h5>
-                <div id="bdes-ticker" style="overflow: hidden; position: relative; height: 0px;">
-                    <ul style="font-size: 0.9em; position: absolute; margin: 0px; padding: 0px; width: 85%;">
-                        <li class="lineheight"><a href="notice-view-main.php?id=106">“বঙ্গবন্ধু শেখ মজিব স্কলার “নির্বাচন ও অ্যাওয়াড প্রদান ২০২৩ </a> <i>(২১-০৯-২০২৩)</i></li>
-                        <li class="lineheight"><a href="notice-view-main.php?id=106">বিভাগ পরিবর্তন বিষয়ে বিজ্ঞপ্তি: </a> <i>(২১-০৯-২০২৩)</i></li>
-
-                    </ul>
-                    <div style="float:right">
-                        <a class="btn" href="#">সকল</a>
                     </div>
                 </div>
             </div>

@@ -21,7 +21,7 @@
         public string ChairmanName { get; set; }
         public string ChairmanDetails { get; set; }
         public string ChairmanImage { get; set; }
-        public List<NoticeVM> Notices { get; set; }
-        public NoticeVM Notice { get; set; }
+        public List<Notice> Notices { get; set; }
+        public Notice Notice { get; set; }
     }
 }
