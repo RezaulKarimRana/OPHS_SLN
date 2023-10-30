@@ -19,5 +19,6 @@ namespace Web.Data
         public DbSet<Notice> Notice { get; set; }
         public DbSet<Member> Member { get; set; }
         public DbSet<AboutOurs> AboutOurs { get; set; }
+        public DbSet<Speech> Speech { get; set; }
     }
 }
