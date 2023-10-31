@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using Web.Data;
-using Web.Models;
 using Web.Models.ViewModel;
+using static Web.Models.ApplicationConstants;
 
 namespace Web.Areas.DashBoard.Controllers
 {
@@ -18,61 +17,66 @@ namespace Web.Areas.DashBoard.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var dashBoardModel = await GetCommonData();
-            return View(dashBoardModel);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-        public async Task<DashBoardVM> GetCommonData()
-        {
             var institute = await _context.Institute.FirstOrDefaultAsync();
             var banner = await _context.Banner.ToListAsync();
             var allNotice = await _context.Notice.OrderByDescending(x => x.Id).ToListAsync();
-            var dashBoardModel = new DashBoardVM
+            var data = new DashBoardVM
             {
                 InstituteName = institute == null ? string.Empty : institute.Name,
                 InstituteAddress = institute == null ? string.Empty : institute.Address,
                 InstitutePostalAddress = institute == null ? string.Empty : institute.PostalAddress,
                 Notices = allNotice
             };
-            if(banner != null)
+            if (banner != null)
             {
                 if (banner.Count >= 1)
-                    dashBoardModel.Banner1Src = banner[0].Path;
+                    data.Banner1Src = banner[0].Path;
                 if (banner.Count >= 2)
-                    dashBoardModel.Banner2Src = banner[1].Path;
+                    data.Banner2Src = banner[1].Path;
                 if (banner.Count >= 3)
-                    dashBoardModel.Banner3Src = banner[2].Path;
+                    data.Banner3Src = banner[2].Path;
                 if (banner.Count >= 4)
-                    dashBoardModel.Banner4Src = banner[3].Path;
+                    data.Banner4Src = banner[3].Path;
                 if (banner.Count >= 5)
-                    dashBoardModel.Banner5Src = banner[4].Path;
+                    data.Banner5Src = banner[4].Path;
                 if (banner.Count >= 6)
-                    dashBoardModel.Banner6Src = banner[5].Path;
+                    data.Banner6Src = banner[5].Path;
             }
-            return dashBoardModel;
-        }
-        public string ConvertEnToBn(string data)
-        {
-            return data.Replace("0", "\u09E6")
-                    .Replace("1", "\u09E7")
-                    .Replace("2", "\u09E8")
-                    .Replace("3", "\u09E9")
-                    .Replace("4", "\u09EA")
-                    .Replace("5", "\u09EB")
-                    .Replace("6", "\u09EC")
-                    .Replace("7", "\u09ED")
-                    .Replace("8", "\u09EE")
-                    .Replace("9", "\u09EF");
+            var headMaster = await _context.Member.Where(x => x.DesignationId == (int)DesignationType.HeadMaster).FirstOrDefaultAsync();
+            if (headMaster != null)
+            {
+                var folderName = string.Empty;
+                var imgPrefix = "data:image/jpeg;base64,";
+                folderName = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", headMaster.FilePath);
+                var memoryStream = new MemoryStream();
+
+                using (var stream = new FileStream(folderName, FileMode.Open))
+                {
+                    await stream.CopyToAsync(memoryStream);
+                }
+                memoryStream.Position = 0;
+                headMaster.Base64Image = imgPrefix + Convert.ToBase64String(memoryStream.ToArray());
+                data.HeadMasterName = headMaster.Name;
+                data.HeadMasterImage = headMaster.Base64Image;
+            }
+            var chairman = await _context.Member.Where(x => x.DesignationId == (int)DesignationType.Chairman).FirstOrDefaultAsync();
+            if (chairman != null)
+            {
+                var folderName = string.Empty;
+                var imgPrefix = "data:image/jpeg;base64,";
+                folderName = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", chairman.FilePath);
+                var memoryStream = new MemoryStream();
+
+                using (var stream = new FileStream(folderName, FileMode.Open))
+                {
+                    await stream.CopyToAsync(memoryStream);
+                }
+                memoryStream.Position = 0;
+                chairman.Base64Image = imgPrefix + Convert.ToBase64String(memoryStream.ToArray());
+                data.ChairmanName = chairman.Name;
+                data.ChairmanImage = chairman.Base64Image;
+            }
+            return View(data);
         }
     }
 }
