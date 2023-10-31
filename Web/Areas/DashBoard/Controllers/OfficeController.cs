@@ -15,7 +15,7 @@ namespace Web.Areas.DashBoard.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Office()
+        public async Task<IActionResult> OfficeDetails()
         {
             var data = await GetCommonData();
             return View(data);
