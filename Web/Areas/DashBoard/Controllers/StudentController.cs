@@ -16,50 +16,59 @@ namespace Web.Areas.DashBoard.Controllers
 
         public async Task<IActionResult> Uniform()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetCommonData();
+            return View(data);
         }
         public async Task<IActionResult> AdmissionSystem()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetCommonData();
+            return View(data);
         }
         public async Task<IActionResult> Rules()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetCommonData();
+            return View(data);
         }
         public async Task<IActionResult> OurStudents()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetCommonData();
+            return View(data);
         }
         public async Task<IActionResult> SuccessHistory()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetCommonData();
+            return View(data);
         }
         public async Task<IActionResult> DevelopmentProject()
         {
-            var dashBoardModel = await GetDashBoardData();
-            return View(dashBoardModel);
+            var data = await GetCommonData();
+            return View(data);
         }
 
-        public async Task<DashBoardVM> GetDashBoardData()
+        public async Task<DashBoardVM> GetCommonData()
         {
             var institute = await _context.Institute.FirstOrDefaultAsync();
             var banner = await _context.Banner.ToListAsync();
-            var dashBoardModel = new DashBoardVM
+            var data = new DashBoardVM
             {
-                InstituteName = institute.Name,
-                Banner1Src = banner[0].Path,
-                Banner2Src = banner[1].Path,
-                Banner3Src = banner[3].Path,
-                Banner4Src = banner[3].Path,
-                Banner5Src = banner[4].Path,
-                Banner6Src = banner[5].Path
+                InstituteName = institute == null ? string.Empty : institute.Name
             };
-            return dashBoardModel;
+            if (banner != null)
+            {
+                if (banner.Count >= 1)
+                    data.Banner1Src = banner[0].Path;
+                if (banner.Count >= 2)
+                    data.Banner2Src = banner[1].Path;
+                if (banner.Count >= 3)
+                    data.Banner3Src = banner[2].Path;
+                if (banner.Count >= 4)
+                    data.Banner4Src = banner[3].Path;
+                if (banner.Count >= 5)
+                    data.Banner5Src = banner[4].Path;
+                if (banner.Count >= 6)
+                    data.Banner6Src = banner[5].Path;
+            }
+            return data;
         }
     }
 }
