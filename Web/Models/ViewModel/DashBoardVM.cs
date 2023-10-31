@@ -23,5 +23,9 @@
         public string ChairmanImage { get; set; }
         public List<Notice> Notices { get; set; }
         public Notice Notice { get; set; }
+        public List<Member> GoverningBody { get; set; }
+        public List<Member> Teacher { get; set; }
+        public List<Member> Officials { get; set; }
+        public List<Member> Employees { get; set; }
     }
 }

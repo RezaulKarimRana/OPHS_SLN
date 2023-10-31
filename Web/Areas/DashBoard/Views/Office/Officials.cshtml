@@ -1,11 +1,41 @@
 ﻿@model DashBoardVM;
 
 <div id="contents" class="sixteen columns">
-    <h3 style="text-align: center;"> কর্মচারী </h3>
+    <h3 style="text-align: center;"> কর্মকর্তাদের তালিকা </h3>
     <hr/>
-    <div class="twelve columns">
+    <div class="sixteen columns">
         <div style="text-align: justify;">
-            <p>তথ্য উন্নয়নের কাজ চলছে....</p> <br>
+            <div class="row">
+                
+            <div class="col-12">
+                <table class="table" id="Tables_id" style="width:100%">
+                <thead>
+                    <tr>
+                        <td style="text-align: center;">নাম</td>
+                        <td style="text-align: center;">পদবী</td>
+                        <td style="text-align: center;">মোবাইল নাম্বারঃ</td>
+                        <td style="text-align: center;">ছবি</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(Model.Officials != null)
+                    {
+                        foreach(var item in Model.Officials)
+                        {
+                            <tr>
+                                <td style="text-align: center;">@item.Name</td>
+                                <td style="text-align: center;">@item.DesignationName</td>
+                                <td style="text-align: center;">@item.PhoneNumber</td>
+                                <td style="text-align: center;">
+                                    <img src="@item.Base64Image" height="100" width="150" />
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            </div>
+            </div>
         </div>
     </div>
 </div>

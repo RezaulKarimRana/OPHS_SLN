@@ -34,7 +34,7 @@ namespace Web.Areas.Admin.Controllers
             {
                 var serial = 1;
                 var allNotice = await _context.Notice.ToListAsync();
-                if(allNotice.Any())
+                if(allNotice != null)
                 {
                     serial = allNotice.Count + 1;
                 }

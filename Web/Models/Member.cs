@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static Web.Models.ApplicationConstants;
 
 namespace Web.Models
 {
@@ -10,6 +11,14 @@ namespace Web.Models
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
         public int DesignationId { get; set; }
+        [NotMapped]
+        public string DesignationName
+        {
+            get
+            {
+                return EnumUtility.GetDescriptionFromEnumValue((DesignationType)DesignationId);
+            }
+        }
         public string FileName { get; set; }
         public string FileType { get; set; }
         public string FilePath { get; set; }

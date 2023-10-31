@@ -22,7 +22,7 @@ namespace Web.Areas.Admin.Controllers
         public async Task<IActionResult> GetAll()
         {
             var data = await _context.Member.Where(x => x.DesignationId == (int)DesignationType.Committe_Member).ToListAsync();
-            if (data.Any())
+            if (data != null)
             {
                 var folderName = string.Empty;
                 var imgPrefix = "data:image/jpeg;base64,";

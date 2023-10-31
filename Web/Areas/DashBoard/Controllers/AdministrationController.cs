@@ -64,22 +64,94 @@ namespace Web.Areas.DashBoard.Controllers
         }
         public async Task<IActionResult> GoverningBody()
         {
+            var folderName = string.Empty;
+            var imgPrefix = "data:image/jpeg;base64,";
             var data = await GetCommonData();
+            data.GoverningBody = await _context.Member.Where(x => (x.DesignationId == (int)DesignationType.Chairman) || (x.DesignationId == (int)DesignationType.Assistant_Chairman) || (x.DesignationId == (int)DesignationType.Committe_Member)).OrderBy(p=> p.DesignationId).ToListAsync();
+            if (data.GoverningBody != null)
+            {
+                foreach(var item in data.GoverningBody)
+                {
+                    folderName = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", item.FilePath);
+                    var memoryStream = new MemoryStream();
+
+                    using (var stream = new FileStream(folderName, FileMode.Open))
+                    {
+                        await stream.CopyToAsync(memoryStream);
+                    }
+                    memoryStream.Position = 0;
+                    item.Base64Image = imgPrefix + Convert.ToBase64String(memoryStream.ToArray());
+                }
+            }
             return View(data);
         }
         public async Task<IActionResult> TeacherList()
         {
+            var folderName = string.Empty;
+            var imgPrefix = "data:image/jpeg;base64,";
             var data = await GetCommonData();
+            data.Teacher = await _context.Member.Where(x => (x.DesignationId == (int)DesignationType.HeadMaster) || (x.DesignationId == (int)DesignationType.Assistant_Teacher) || (x.DesignationId == (int)DesignationType.Teacher)).OrderBy(p => p.DesignationId).ToListAsync();
+            if (data.Teacher != null)
+            {
+                foreach (var item in data.Teacher)
+                {
+                    folderName = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", item.FilePath);
+                    var memoryStream = new MemoryStream();
+
+                    using (var stream = new FileStream(folderName, FileMode.Open))
+                    {
+                        await stream.CopyToAsync(memoryStream);
+                    }
+                    memoryStream.Position = 0;
+                    item.Base64Image = imgPrefix + Convert.ToBase64String(memoryStream.ToArray());
+                }
+            }
             return View(data);
         }
         public async Task<IActionResult> OfficialsList()
         {
+            var folderName = string.Empty;
+            var imgPrefix = "data:image/jpeg;base64,";
             var data = await GetCommonData();
+            data.Officials = await _context.Member.Where(x => x.DesignationId == (int)DesignationType.Officials).OrderBy(p => p.DesignationId).ToListAsync();
+            if (data.Officials != null)
+            {
+                foreach (var item in data.Officials)
+                {
+                    folderName = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", item.FilePath);
+                    var memoryStream = new MemoryStream();
+
+                    using (var stream = new FileStream(folderName, FileMode.Open))
+                    {
+                        await stream.CopyToAsync(memoryStream);
+                    }
+                    memoryStream.Position = 0;
+                    item.Base64Image = imgPrefix + Convert.ToBase64String(memoryStream.ToArray());
+                }
+            }
             return View(data);
         }
         public async Task<IActionResult> EmployeeList()
         {
+            var folderName = string.Empty;
+            var imgPrefix = "data:image/jpeg;base64,";
             var data = await GetCommonData();
+            data.Employees = await _context.Member.Where(x => x.DesignationId == (int)DesignationType.Employee).OrderBy(p => p.DesignationId).ToListAsync();
+            if (data.Employees != null)
+            {
+                foreach (var item in data.Employees)
+                {
+                    folderName = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", item.FilePath);
+                    var memoryStream = new MemoryStream();
+
+                    using (var stream = new FileStream(folderName, FileMode.Open))
+                    {
+                        await stream.CopyToAsync(memoryStream);
+                    }
+                    memoryStream.Position = 0;
+                    item.Base64Image = imgPrefix + Convert.ToBase64String(memoryStream.ToArray());
+                }
+            }
             return View(data);
         }
 
