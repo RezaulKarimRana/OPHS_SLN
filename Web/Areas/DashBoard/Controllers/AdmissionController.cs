@@ -44,8 +44,6 @@ namespace Web.Areas.DashBoard.Controllers
         {
             var institute = await _context.Institute.FirstOrDefaultAsync();
             var banner = await _context.Banner.ToListAsync();
-            var headMaster = await _context.HeadMaster.FirstOrDefaultAsync();
-            var chairman = await _context.Chairman.FirstOrDefaultAsync();
             var dashBoardModel = new DashBoardVM
             {
                 InstituteName = institute.Name,
@@ -54,11 +52,7 @@ namespace Web.Areas.DashBoard.Controllers
                 Banner3Src = banner[3].Path,
                 Banner4Src = banner[3].Path,
                 Banner5Src = banner[4].Path,
-                Banner6Src = banner[5].Path,
-                HeadMasterName = headMaster.Name,
-                HeadMasterImage = headMaster.Image,
-                ChairmanName = chairman.Name,
-                ChairmanImage = chairman.Image
+                Banner6Src = banner[5].Path
             };
             return dashBoardModel;
         }

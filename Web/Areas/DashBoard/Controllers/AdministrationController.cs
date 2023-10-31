@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Web.Data;
 using Web.Models.ViewModel;
+using static Web.Models.ApplicationConstants;
 
 namespace Web.Areas.DashBoard.Controllers
 {
@@ -15,20 +16,50 @@ namespace Web.Areas.DashBoard.Controllers
         }
         public async Task<IActionResult> HeadMaster()
         {
-            var headMaster = await _context.HeadMaster.FirstOrDefaultAsync();
+            var headMaster = await _context.Member.Where(x=> x.DesignationId == (int)DesignationType.HeadMaster).FirstOrDefaultAsync();
+            if (headMaster != null)
+            {
+                var folderName = string.Empty;
+                var imgPrefix = "data:image/jpeg;base64,";
+                folderName = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", headMaster.FilePath);
+                var memoryStream = new MemoryStream();
+
+                using (var stream = new FileStream(folderName, FileMode.Open))
+                {
+                    await stream.CopyToAsync(memoryStream);
+                }
+                memoryStream.Position = 0;
+                headMaster.Base64Image = imgPrefix + Convert.ToBase64String(memoryStream.ToArray());
+            }
+            var speech = await _context.Speech.FirstOrDefaultAsync();
             var data = await GetCommonData();
             data.HeadMasterName = headMaster == null ? string.Empty : headMaster.Name;
-            data.HeadMasterImage = headMaster == null ? string.Empty : headMaster.Image;
-            data.HeadMasterDetails = headMaster == null ? string.Empty : headMaster.Details;
+            data.HeadMasterImage = headMaster == null ? string.Empty : headMaster.Base64Image;
+            data.HeadMasterSpeech = speech == null ? string.Empty : speech.HeadMasterSpeech;
             return View(data);
         }
         public async Task<IActionResult> Chairman()
         {
-            var chairman = await _context.Chairman.FirstOrDefaultAsync();
+            var chairman = await _context.Member.Where(x => x.DesignationId == (int)DesignationType.Chairman).FirstOrDefaultAsync();
+            if (chairman != null)
+            {
+                var folderName = string.Empty;
+                var imgPrefix = "data:image/jpeg;base64,";
+                folderName = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", chairman.FilePath);
+                var memoryStream = new MemoryStream();
+
+                using (var stream = new FileStream(folderName, FileMode.Open))
+                {
+                    await stream.CopyToAsync(memoryStream);
+                }
+                memoryStream.Position = 0;
+                chairman.Base64Image = imgPrefix + Convert.ToBase64String(memoryStream.ToArray());
+            }
+            var speech = await _context.Speech.FirstOrDefaultAsync();
             var data = await GetCommonData();
             data.ChairmanName = chairman == null ? string.Empty : chairman.Name;
-            data.ChairmanImage = chairman == null ? string.Empty : chairman.Image;
-            data.ChairmanDetails = chairman == null ? string.Empty : chairman.Details;
+            data.ChairmanImage = chairman == null ? string.Empty : chairman.Base64Image;
+            data.ChairmanSpeech = speech == null ? string.Empty : speech.ChairmanSpeech;
             return View(data);
         }
         public async Task<IActionResult> GoverningBody()

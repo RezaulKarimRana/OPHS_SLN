@@ -36,18 +36,12 @@ namespace Web.Areas.DashBoard.Controllers
         {
             var institute = await _context.Institute.FirstOrDefaultAsync();
             var banner = await _context.Banner.ToListAsync();
-            var headMaster = await _context.HeadMaster.FirstOrDefaultAsync();
-            var chairman = await _context.Chairman.FirstOrDefaultAsync();
             var allNotice = await _context.Notice.OrderByDescending(x => x.Id).ToListAsync();
             var dashBoardModel = new DashBoardVM
             {
                 InstituteName = institute == null ? string.Empty : institute.Name,
                 InstituteAddress = institute == null ? string.Empty : institute.Address,
                 InstitutePostalAddress = institute == null ? string.Empty : institute.PostalAddress,
-                HeadMasterName = headMaster == null ? string.Empty : headMaster.Name,
-                HeadMasterImage = headMaster == null ? string.Empty : headMaster.Image,
-                ChairmanName =  chairman == null ? string.Empty : chairman.Name,
-                ChairmanImage =  chairman == null ? string.Empty : chairman.Image,
                 Notices = allNotice
             };
             if(banner != null)
