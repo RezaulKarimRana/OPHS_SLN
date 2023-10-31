@@ -16,6 +16,8 @@ namespace Web.Models
         {
             get
             {
+                if(DesignationId == 0)
+                    return string.Empty;
                 return EnumUtility.GetDescriptionFromEnumValue((DesignationType)DesignationId);
             }
         }

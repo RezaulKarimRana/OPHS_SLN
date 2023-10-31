@@ -57,9 +57,9 @@ namespace Web.Areas.Admin.Controllers
             }
             catch (Exception ex)
             {
-                return Ok(ex.Message);
+                return Json(new { Success = false, Message = ex.Message });
             }
-            return Json(null);
+            return Json(new { Success = true });
         }
     }
 }

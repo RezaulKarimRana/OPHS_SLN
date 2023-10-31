@@ -119,6 +119,7 @@
                     alertify.success("হালনাগাদ সম্পন্ন হয়েছে");
                     getAllNotice();
                     $('#addNoticeModal').modal('hide');
+                    console.log(response)
                 }
             });
         });
@@ -141,6 +142,7 @@
                                     if (response.success) {
                                         alertify.success("ডিলিট সম্পন্ন হয়েছে");
                                         getAllNotice();
+                                        console.log(response)
                                     }
                                 }
                             });

@@ -214,6 +214,7 @@
                     alertify.success("হালনাগাদ সম্পন্ন হয়েছে");
                     getAllEmployees();
                     $('#addEmployeeModal').modal('hide');
+                    console.log(response)
                 }
             });
         });
@@ -246,6 +247,7 @@
                                     if (response.success) {
                                         alertify.success("ডিলিট সম্পন্ন হয়েছে");
                                         getAllEmployees();
+                                        console.log(response)
                                     }
                                 }
                             });
@@ -277,6 +279,7 @@
                     alertify.success("হালনাগাদ সম্পন্ন হয়েছে");
                     getAllEmployees();
                     $('#editEmployeeModal').modal('hide');
+                    console.log(response)
                 }
             });
         });
