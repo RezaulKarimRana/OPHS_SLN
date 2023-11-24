@@ -33,7 +33,7 @@ namespace Web.Areas.Identity.Pages.Account
             [Display(Name = "User Login")]
             [Required]
             public string UserLogin { get; set; }
-            public string Email { get; set; } = "ophs.admin@gmail.com";
+            public string Email { get; set; } = "s115283p@gmail.com";
             [Required]
             [DataType(DataType.Password)]
             public string Password { get; set; }
@@ -75,7 +75,7 @@ namespace Web.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, "Invalid Password");
                     return Page();
                 }
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, true);
+                var result = await _signInManager.PasswordSignInAsync(Input.UserLogin, Input.Password, Input.RememberMe, true);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
